@@ -27,7 +27,22 @@
       {
         "name": "next"
       }
-    ]
+    ],
+    "baseUrl": "src/",
+    "paths": {
+      "@/components/*": [
+        "app/components/*"
+      ],
+      "@/contexts/*": [
+        "app/contexts/*"
+      ],
+      "@/@types/*": [
+        "@types/*"
+      ],
+      "@/globals.css": [
+        "app/globals.css"
+      ]
+    }
   },
   "include": [
     "./dist/types/**/*.ts",

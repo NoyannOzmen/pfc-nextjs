@@ -1,6 +1,9 @@
 import type { Metadata } from 'next'
-import '../globals.css'
- 
+import './globals.css'
+import { Providers } from './providers';
+import Header from './components/Header/Header';
+import Footer from './components/Footer/Footer';
+
 export const metadata: Metadata = {
   title: 'Pet Foster Connect',
   description: 'Pet Foster Connect, mise en relations entre refuges de protection animale et familles d\'accueil',
@@ -27,9 +30,17 @@ export default function RootLayout({
         </style>
       </head>
         <body className="w-screen h-screen font-body flex flex-col bg-fond">
-          <div id="root">{children}</div>
+          <div id="root">
+            <Providers>
+              <Header />
+              {children}
+              <Footer />
+            </Providers>
+          </div>
         </body>
     </html>
+
+
 
   )
 }
