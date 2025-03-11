@@ -31,7 +31,7 @@ function ShelterUploadPage() {
 
       try {
         const response = await fetch
-          (`${import.meta.env.VITE_API_URL}/upload/logo`,
+          (`${process.env.NEXT_PUBLIC_API_URL}/upload/logo`,
           {
             method: 'POST',
             /* headers: { "Content-type" : "multipart/form-data" }, */
@@ -102,7 +102,7 @@ function ShelterUploadPage() {
             {currentLogo &&
               <div className="flex flex-col justify-center">
                 <h3 className="font-body text-2xl text-center">Votre Logo actuel</h3>
-                <img className="w-[40%] mx-auto rounded-lg" src={`${import.meta.env.VITE_API_URL}` + `${currentLogo.url}`} alt="" />
+                <img className="w-[40%] mx-auto rounded-lg" src={`${process.env.NEXT_PUBLIC_API_URL}` + `${currentLogo.url}`} alt="" />
               </div>
             }
           </div>

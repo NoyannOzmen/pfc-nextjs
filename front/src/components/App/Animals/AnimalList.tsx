@@ -76,7 +76,7 @@ function AnimalList() {
 
     try {
       const response = await fetch
-        (`${import.meta.env.VITE_API_URL}/animaux`,
+        (`${process.env.NEXT_PUBLIC_API_URL}/animaux`,
         {
           method: 'POST',
           headers: { "Content-type" : "application/json" },

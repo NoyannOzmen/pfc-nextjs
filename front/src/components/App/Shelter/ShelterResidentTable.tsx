@@ -32,7 +32,7 @@ function ShelterResidentTable({ animal }: ShelterResidentTableProps) {
               <div className="flex p-6 pb-4">
                 <div className="flex flex-col gap-2">
                   { animal.images_animal[0].url ? (
-                    <img className="w-28 rounded-lg" src={`${import.meta.env.VITE_API_URL}` + `${animal.images_animal[0].url}`} alt={`Photo de ${animal.nom}`} />
+                    <img className="w-28 rounded-lg" src={`${process.env.NEXT_PUBLIC_API_URL}` + `${animal.images_animal[0].url}`} alt={`Photo de ${animal.nom}`} />
                   ) : (
                     <img className="w-28 rounded-lg" src="/images/animal_empty.webp" alt="Photo à venir" />
                   )}

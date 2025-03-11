@@ -25,7 +25,7 @@ function ShelterDetails() {
 
     <div className="font-body mx-auto w-[80%] rounded-lg my-1 justify-center flex">
        	{ shelterUrl ? (
-					<img className="rounded-lg" src={`${import.meta.env.VITE_API_URL}` + `${shelterUrl}`} alt={`Logo de ${shelter.nom}`}></img>
+					<img className="rounded-lg" src={`${process.env.NEXT_PUBLIC_API_URL}` + `${shelterUrl}`} alt={`Logo de ${shelter.nom}`}></img>
 				) : (
 					<img className="rounded-lg" src="/images/shelter_empty.webp" alt={`Logo de ${shelter.nom} bientôt visible`} />
 				)}

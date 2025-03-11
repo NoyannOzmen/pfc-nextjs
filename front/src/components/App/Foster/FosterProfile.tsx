@@ -34,7 +34,7 @@ function FosterProfile() {
     async function fetchUser() {
       try {
         const response = await fetch
-          (`${import.meta.env.VITE_API_URL}/famille/profil`,
+          (`${process.env.NEXT_PUBLIC_API_URL}/famille/profil`,
           {
             method: 'POST',
             headers: { "Content-type" : "application/json" },
@@ -125,7 +125,7 @@ function FosterProfile() {
 
     try {
       const response = await fetch
-        (`${import.meta.env.VITE_API_URL}/famille/profil/delete`,
+        (`${process.env.NEXT_PUBLIC_API_URL}/famille/profil/delete`,
         {
           method: 'POST',
           headers: { "Content-type" : "application/json" },

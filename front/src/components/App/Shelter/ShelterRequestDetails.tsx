@@ -51,7 +51,7 @@ function ShelterRequestDetails() {
 
     try {
       const response = await fetch
-        (`${import.meta.env.VITE_API_URL}/associations/profil/demandes/${demandeId}/accept`,
+        (`${process.env.NEXT_PUBLIC_API_URL}/associations/profil/demandes/${demandeId}/accept`,
         {
           method: 'POST',
           headers: { "Content-type" : "application/json" },
@@ -95,7 +95,7 @@ function ShelterRequestDetails() {
 
     try {
       const response = await fetch
-        (`${import.meta.env.VITE_API_URL}/associations/profil/demandes/${demandeId}/deny`,
+        (`${process.env.NEXT_PUBLIC_API_URL}/associations/profil/demandes/${demandeId}/deny`,
         {
           method: 'POST',
           headers: { "Content-type" : "application/json" },
@@ -165,7 +165,7 @@ function ShelterRequestDetails() {
             <div className="flex p-6 pb-4">
               <div className="flex flex-col gap-2">
               { animal.images_animal[0].url ? (
-                <img className="w-28 rounded-lg" src={`${import.meta.env.VITE_API_URL}` + `${animal.images_animal[0].url}`} alt={`Photo de ${animal.nom}`} />
+                <img className="w-28 rounded-lg" src={`${process.env.NEXT_PUBLIC_API_URL}` + `${animal.images_animal[0].url}`} alt={`Photo de ${animal.nom}`} />
               ) : (
                 <img className="w-28 rounded-lg" src="/images/animal_empty.webp" alt="Photo à venir" />
               )}

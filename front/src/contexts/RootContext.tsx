@@ -52,7 +52,7 @@ export default function RootContextProvider({
   useEffect(() => {
     const fetchAnimals = async () => {
       try {
-        const response = await fetch(`${import.meta.env.VITE_API_URL}/animaux`);
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/animaux`);
         const data = await response.json();
         setAnimals(data);
       } catch (error) {
@@ -62,7 +62,7 @@ export default function RootContextProvider({
 
     const fetchSpecies = async () => {
       try {
-        const response = await fetch(`${import.meta.env.VITE_API_URL}/especes`);
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/especes`);
         const data = await response.json();
         setSpecies(data);
       } catch (error) {
@@ -72,7 +72,7 @@ export default function RootContextProvider({
 
     const fetchTags = async () => {
       try {
-        const response = await fetch(`${import.meta.env.VITE_API_URL}/tags`);
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/tags`);
         const data = await response.json();
         setTags(data);
       } catch (error) {
@@ -82,7 +82,7 @@ export default function RootContextProvider({
 
     const fetchShelters = async () => {
       try {
-        const response = await fetch(`${import.meta.env.VITE_API_URL}/associations`);
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/associations`);
         const data = await response.json();
         setShelters(data);
       } catch (error) {

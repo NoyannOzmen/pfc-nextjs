@@ -25,7 +25,7 @@ function FosterSignIn() {
       setUserMessage(null)
       try {
         const response = await fetch
-          (`${import.meta.env.VITE_API_URL}/famille/inscription`,
+          (`${process.env.NEXT_PUBLIC_API_URL}/famille/inscription`,
           {
             method: 'POST',
             headers: { "Content-type" : "application/json" },

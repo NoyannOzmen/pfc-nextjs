@@ -43,7 +43,7 @@ export default function UserContextProvider({
     setUserMessage(null)
     try {
       const response = await fetch
-        (`${import.meta.env.VITE_API_URL}/connexion`,
+        (`${process.env.NEXT_PUBLIC_API_URL}/connexion`,
         {
           method: 'POST',
           headers: { "Content-type" : "application/json" },

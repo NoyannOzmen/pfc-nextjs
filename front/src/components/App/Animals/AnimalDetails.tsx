@@ -51,7 +51,7 @@ function AnimalDetails() {
 
 		try {
 			const response = await fetch
-				(`${import.meta.env.VITE_API_URL}/animaux/${animalId}/faire-une-demande`,
+				(`${process.env.NEXT_PUBLIC_API_URL}/animaux/${animalId}/faire-une-demande`,
 				{
 					method: 'POST',
 					headers: { "Content-type" : "application/json" },
@@ -74,7 +74,7 @@ function AnimalDetails() {
 		<div className="font-body mx-auto w-[80%] bg-zoning rounded-lg shadow dark:bg-gray-800 my-4">
 			{ animalUrl ? (
 				<img className="mx-auto my-2"
-				src={`${import.meta.env.VITE_API_URL}` + `${animalUrl}`} alt={`Photo de ${animal.nom}`} />
+				src={`${process.env.NEXT_PUBLIC_API_URL}` + `${animalUrl}`} alt={`Photo de ${animal.nom}`} />
 			) : (
 				<img className="mx-auto my-2" src="/images/animal_empty.webp" alt="Photo à venir" />
 			)}
@@ -131,7 +131,7 @@ function AnimalDetails() {
 			<div className="font-body mx-auto w-[80%] rounded-lg my-4">
  				{ shelterUrl ? (
 					<img className="mx-auto"
-					src={`${import.meta.env.VITE_API_URL}` + `${shelterUrl}`} alt={`Logo de ${animal.refuge.nom}`}></img>
+					src={`${process.env.NEXT_PUBLIC_API_URL}` + `${shelterUrl}`} alt={`Logo de ${animal.refuge.nom}`}></img>
 				) : (
 					<img className="mx-auto" src="/images/shelter_empty.webp" alt={`Logo de ${animal.refuge.nom} bientôt visible`} />
 				)}

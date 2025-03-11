@@ -24,7 +24,7 @@ function CarouselOfThree() {
           <div className="flex bg-zoning rounded-lg shadow dark:bg-gray-800 flex-row md:flex-col p-4">
             <div className="w-full md:w-full flex justify-center items-center">
             { animal.images_animal ? (
-            <img className="object-contain w-[80%] h-48 md:h-full rounded-lg" src={`${import.meta.env.VITE_API_URL}` + `${animal.images_animal[0].url}`} alt={`Photo de ${animal.nom}`} />
+            <img className="object-contain w-[80%] h-48 md:h-full rounded-lg" src={`${process.env.NEXT_PUBLIC_API_URL}` + `${animal.images_animal[0].url}`} alt={`Photo de ${animal.nom}`} />
             ) : (
               <img className="object-contain w-[80%] h-48 md:h-full rounded-lg" src="/images/animal_empty.webp" alt="Photo à venir" />
             )}

@@ -25,7 +25,7 @@ function CarouselOfOne() {
           <div className="flex bg-fond rounded-lg shadow dark:bg-gray-800 flex-col md:flex-col mx-auto my-2 w-[75%] p-4">
             <div className="w-full md:w-full flex justify-center items-center">
             { animal.images_animal ? (
-            <img className="object-contain md:h-full rounded-lg" src={`${import.meta.env.VITE_API_URL}` + `${animal.images_animal[0].url}`} alt={`Photo de ${animal.nom}`} />
+            <img className="object-contain md:h-full rounded-lg" src={`${process.env.NEXT_PUBLIC_API_URL}` + `${animal.images_animal[0].url}`} alt={`Photo de ${animal.nom}`} />
             ) : (
             <img className="object-contain md:h-full rounded-lg" src="/images/animal_empty.webp" alt="Photo à venir" />
             )}

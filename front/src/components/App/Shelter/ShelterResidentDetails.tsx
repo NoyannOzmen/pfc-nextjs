@@ -49,7 +49,7 @@ function ShelterResidentDetails() {
 
       try {
         const response = await fetch
-          (`${import.meta.env.VITE_API_URL}/upload/photo`,
+          (`${process.env.NEXT_PUBLIC_API_URL}/upload/photo`,
           {
             method: 'POST',
             /* headers: { "Content-type" : "multipart/form-data" }, */
@@ -107,7 +107,7 @@ function ShelterResidentDetails() {
           <div className="flex p-6 pb-4">
             <div className="flex flex-col gap-2">
               { animalUrl ? (
-                <img className="w-28 rounded-lg" src={`${import.meta.env.VITE_API_URL}` + `${animalUrl}`} alt={`Photo de ${animal.nom}`} />
+                <img className="w-28 rounded-lg" src={`${process.env.NEXT_PUBLIC_API_URL}` + `${animalUrl}`} alt={`Photo de ${animal.nom}`} />
               ) : (
                  <img className="w-28 rounded-lg" src="/images/animal_empty.webp" alt="Photo à venir" />
               )}
