@@ -36,7 +36,7 @@ function ShelterDashboard() {
     async function fetchUser() {
       try {
         const response = await fetch
-          (`${process.env.NEXT_PUBLIC_API_URL}/associations/profil`,
+          (process.env.NEXT_PUBLIC_API_URL + `/associations/profil`,
           {
             method: 'POST',
             headers: { "Content-type" : "application/json" },
@@ -138,7 +138,7 @@ function ShelterDashboard() {
 
     try {
       const response = await fetch
-        (`${process.env.NEXT_PUBLIC_API_URL}/association/profil/delete`,
+        (process.env.NEXT_PUBLIC_API_URL + `/association/profil/delete`,
         {
           method: 'POST',
           headers: { "Content-type" : "application/json" },

@@ -77,7 +77,7 @@ function AnimalList() {
 
     try {
       const response = await fetch
-        (`${process.env.NEXT_PUBLIC_API_URL}/animaux`,
+        (process.env.NEXT_PUBLIC_API_URL + `/animaux`,
         {
           method: 'POST',
           headers: { "Content-type" : "application/json" },

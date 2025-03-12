@@ -1,5 +1,5 @@
 'use client'
-import { useParams } from 'react-router-dom';
+/* import { useParams } from 'react-router-dom'; */
 import Link from 'next/link';
 import { useState } from 'react';
 import { useRootContext } from '@/contexts/RootContext';
@@ -7,8 +7,9 @@ import { useUserContext } from '@/contexts/UserContext';
 import CarouselOfThree from '@/components/Animal/CarouselOfThree';
 import CarouselOfOne from '@/components/Animal/CarouselOfOne';
 
-function AnimalDetails() {
-	const { animalId } = useParams();
+function AnimalDetails({params} : any) {
+
+	const [animalId] = params.code.split('-');
 	const { animals } = useRootContext();
 	const auth = useUserContext();
 
@@ -53,7 +54,7 @@ function AnimalDetails() {
 
 		try {
 			const response = await fetch
-				(`${process.env.NEXT_PUBLIC_API_URL}/animaux/${animalId}/faire-une-demande`,
+				(process.env.NEXT_PUBLIC_API_URL + `/animaux/${animalId}/faire-une-demande`,
 				{
 					method: 'POST',
 					headers: { "Content-type" : "application/json" },

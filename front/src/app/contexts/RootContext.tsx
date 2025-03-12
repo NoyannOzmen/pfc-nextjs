@@ -53,7 +53,8 @@ export default function RootContextProvider({
   useEffect(() => {
     const fetchAnimals = async () => {
       try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/animaux`);
+        const BaseUrl = process.env.NEXT_PUBLIC_API_URL;
+        const response = await fetch(BaseUrl + `/animaux`);
         const data = await response.json();
         setAnimals(data);
       } catch (error) {
@@ -63,7 +64,8 @@ export default function RootContextProvider({
 
     const fetchSpecies = async () => {
       try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/especes`);
+        const BaseUrl = process.env.NEXT_PUBLIC_API_URL;
+        const response = await fetch(BaseUrl + `/especes`);
         const data = await response.json();
         setSpecies(data);
       } catch (error) {
@@ -73,7 +75,8 @@ export default function RootContextProvider({
 
     const fetchTags = async () => {
       try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/tags`);
+        const BaseUrl = process.env.NEXT_PUBLIC_API_URL;
+        const response = await fetch(BaseUrl + `/tags`);
         const data = await response.json();
         setTags(data);
       } catch (error) {
@@ -83,7 +86,8 @@ export default function RootContextProvider({
 
     const fetchShelters = async () => {
       try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/associations`);
+        const BaseUrl = process.env.NEXT_PUBLIC_API_URL;
+        const response = await fetch(BaseUrl + `/associations`);
         const data = await response.json();
         setShelters(data);
       } catch (error) {

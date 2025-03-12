@@ -33,7 +33,7 @@ function ShelterUploadPage() {
 
       try {
         const response = await fetch
-          (`${process.env.NEXT_PUBLIC_API_URL}/upload/logo`,
+          (process.env.NEXT_PUBLIC_API_URL + `/upload/logo`,
           {
             method: 'POST',
             /* headers: { "Content-type" : "multipart/form-data" }, */

@@ -44,7 +44,7 @@ export default function UserContextProvider({
     setUserMessage(null)
     try {
       const response = await fetch
-        (`${process.env.NEXT_PUBLIC_API_URL}/connexion`,
+        (process.env.NEXT_PUBLIC_API_URL + `/connexion`,
         {
           method: 'POST',
           headers: { "Content-type" : "application/json" },
@@ -56,13 +56,13 @@ export default function UserContextProvider({
 
       if (!res.ok) {
         setUserMessage(res.message)
-        res.redirect("/connexion")
+        
       }
       if (res) {
         setUser(res);
         /* setToken(res.token); */
         sessionStorage.setItem("site", res.token);
-        res.redirect("/")
+        
       }
     } catch (error) {
       console.error(error);

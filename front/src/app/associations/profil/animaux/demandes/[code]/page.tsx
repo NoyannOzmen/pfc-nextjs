@@ -53,7 +53,7 @@ function ShelterRequestDetails() {
 
     try {
       const response = await fetch
-        (`${process.env.NEXT_PUBLIC_API_URL}/associations/profil/demandes/${demandeId}/accept`,
+        (process.env.NEXT_PUBLIC_API_URL + `/associations/profil/demandes/${demandeId}/accept`,
         {
           method: 'POST',
           headers: { "Content-type" : "application/json" },
@@ -97,7 +97,7 @@ function ShelterRequestDetails() {
 
     try {
       const response = await fetch
-        (`${process.env.NEXT_PUBLIC_API_URL}/associations/profil/demandes/${demandeId}/deny`,
+        (process.env.NEXT_PUBLIC_API_URL + `/associations/profil/demandes/${demandeId}/deny`,
         {
           method: 'POST',
           headers: { "Content-type" : "application/json" },

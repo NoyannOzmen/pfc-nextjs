@@ -70,7 +70,7 @@ function ShelterList() {
 
     try {
       const response = await fetch
-        (`${process.env.NEXT_PUBLIC_API_URL}/associations`,
+        (process.env.NEXT_PUBLIC_API_URL + `/associations`,
         {
           method: 'POST',
           headers: { "Content-type" : "application/json" },

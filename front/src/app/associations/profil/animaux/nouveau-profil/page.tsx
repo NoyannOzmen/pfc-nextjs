@@ -54,7 +54,7 @@ function ShelterResidentAddProfile() {
       setUserMessage(null)
       try {
         const response = await fetch
-          (`${process.env.NEXT_PUBLIC_API_URL}/animaux/nouveau-profil`,
+          (process.env.NEXT_PUBLIC_API_URL + `/animaux/nouveau-profil`,
           {
             method: 'POST',
             headers: { "Content-type" : "application/json" },
@@ -103,7 +103,7 @@ function ShelterResidentAddProfile() {
       setUserMessage(null)
       try {
         const response = await fetch
-          (`${process.env.NEXT_PUBLIC_API_URL}/tags/create`,
+          (process.env.NEXT_PUBLIC_API_URL + `/tags/create`,
           {
             method: 'POST',
             headers: { "Content-type" : "application/json" },
@@ -185,7 +185,7 @@ function ShelterResidentAddProfile() {
       setUserMessage(null)
       try {
         const response = await fetch
-          (`${process.env.NEXT_PUBLIC_API_URL}/tags/create`,
+          (process.env.NEXT_PUBLIC_API_URL + `/tags/create`,
           {
             method: 'POST',
             headers: { "Content-type" : "application/json" },

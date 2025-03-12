@@ -5,7 +5,7 @@ import { useState } from "react";
 import { useRootContext } from '@/contexts/RootContext';
 
 /* export async function generateStaticParams() {
-  const animals = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/animaux`).then((res) => res.json())
+  const animals = await fetch(process.env.NEXT_PUBLIC_API_URL + `/animaux`).then((res) => res.json())
  
   return animals.map((animal : any) => ({
     code: animal.id,
@@ -59,7 +59,7 @@ function ShelterResidentDetails() {
 
       try {
         const response = await fetch
-          (`${process.env.NEXT_PUBLIC_API_URL}/upload/photo`,
+          (process.env.NEXT_PUBLIC_API_URL + `/upload/photo`,
           {
             method: 'POST',
             /* headers: { "Content-type" : "multipart/form-data" }, */

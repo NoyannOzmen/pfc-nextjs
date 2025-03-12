@@ -28,7 +28,7 @@ function ShelterSignIn() {
       setUserMessage(null)
       try {
         const response = await fetch
-          (`${process.env.NEXT_PUBLIC_API_URL}/association/inscription`,
+          (process.env.NEXT_PUBLIC_API_URL + `/association/inscription`,
           {
             method: 'POST',
             headers: { "Content-type" : "application/json" },
