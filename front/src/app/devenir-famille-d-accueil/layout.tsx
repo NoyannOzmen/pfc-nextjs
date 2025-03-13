@@ -13,12 +13,9 @@ function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="fr">
-        <body className="w-screen h-screen font-body flex flex-col bg-fond">
-          {children}
-        </body>
-    </html>
-
+    <>
+    {children}
+    </>
   )
 }
 
