@@ -9,13 +9,6 @@ function FosterRequest() {
   const { animals } = useRootContext();
   const auth = useUserContext();
 
-/*   if (!user) {
-    throw new Response('', {
-      status: 404,
-      statusText: 'Not Found',
-    });
-  } */
-
   const familleId = auth.user?.accueillant.id
 
   const requested = animals.filter(( { demandes } ) => demandes.length )

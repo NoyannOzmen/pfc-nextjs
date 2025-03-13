@@ -8,14 +8,7 @@ function ShelterRequestList() {
   const { animals } = useRootContext();
   const auth = useUserContext();
 
- /*  if (!user) {
-    throw new Response('', {
-      status: 404,
-      statusText: 'Not Found',
-    });
-  } */
-
-  const requested = animals.filter(({ association_id, demandes }) => Number(association_id) === Number(auth.user?.id) && demandes.length);
+  const requested = animals.filter(({ association_id, demandes }) => Number(association_id) === Number(auth.user?.refuge.id) && demandes.length);
 
   const requestedAnimals = requested.map((animal) => (
     <ShelterRequestTable key={animal.id} animal={animal} />

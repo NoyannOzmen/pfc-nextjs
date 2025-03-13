@@ -1,30 +1,21 @@
-'use client'
-import { useParams } from "react-router-dom";
 import Link from 'next/link';
-import { useState } from "react";
-import { useRootContext } from '@/contexts/RootContext';
+import ShelterAnimalUpload from '@/components/Shelter/ShelterAnimalUpload';
 
-/* export async function generateStaticParams() {
+export async function generateStaticParams() {
   const animals = await fetch(process.env.NEXT_PUBLIC_API_URL + `/animaux`).then((res) => res.json())
  
   return animals.map((animal : any) => ({
-    code: animal.id,
+			id: animal.id.toString()
   }))
-} */
+}
 
-function ShelterResidentDetails() {
-  const { animalId } = useParams();
-  const { animals } = useRootContext();
-  const [file, setFile] = useState<File | null>(null);
-
-	const animal = animals.find(({id}) => Number(id) === Number(animalId));
-
-	if (!animal) {
-    throw new Response('', {
-      status: 404,
-      statusText: 'Not Found',
-    });
-  }
+async function ShelterResidentDetails({
+  params,
+}: {
+  params: Promise<{ id: string}>
+})  {
+  const { id } = await params;
+	const animal = await fetch(process.env.NEXT_PUBLIC_API_URL + '/animaux/' + Number(id)).then((res) => res.json())
 
   const tagItems = animal.tags.map((tag :any) => (
     <p key={tag.id} className="group rounded-full block bg-accents1 text-fond text-center text-xs font-semibold py-1 px-2">
@@ -44,38 +35,7 @@ function ShelterResidentDetails() {
   ))
 
   const animalUrl = animal.images_animal[0].url;
-
-  const [userMessage, setUserMessage] = useState(null);
-
-  async function sendFile(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    setUserMessage(null)
-    
-    if (file) {
-      const pictureId = JSON.stringify(animal?.id);
-      const formData = new FormData();
-      formData.append("file", file);
-      formData.append("animalId", pictureId)
-
-      try {
-        const response = await fetch
-          (process.env.NEXT_PUBLIC_API_URL + `/upload/photo`,
-          {
-            method: 'POST',
-            /* headers: { "Content-type" : "multipart/form-data" }, */
-            body: formData
-          }
-        );
-
-        const res = await response.json();
-        setUserMessage(res.message)
-      } catch (error) {
-        console.error(error);
-      }
-    }
-  }
   
-
   return(
     <main className="justify-self-stretch flex-1">
   <h2 className="font-grands text-3xl text-center my-2 pt-5">Mon espace association</h2>
@@ -104,12 +64,6 @@ function ShelterResidentDetails() {
       </nav>
       
       <section id="dahboard-container" className="flex justify-center flex-wrap gap-x-6 gap-y-4 p-6">
-
-      {userMessage &&
-        <div>
-          <p className="font-grands font-base text-accents1 text-center">{userMessage}</p>
-        </div>
-      }
         
         {/* <!-- ANIMAL INFO --> */}
         <div className="w-60 md:w-auto">
@@ -161,15 +115,9 @@ function ShelterResidentDetails() {
           )}
           
           <div className="font-body mx-auto w-[80%] bg-zoning rounded-lg shadow dark:bg-gray-800 my-4">
-            <form onSubmit={sendFile}>
-              <div className="flex flex-col">
-                  <label htmlFor="file">Importer une image</label>
-                  <input onChange={(e) => setFile(e.target.files?.[0] || null)} id="file" type="file" name="file" required/>
-              </div>
-              <div className="w-full">
-                <input type="submit" value="Importer" className="hover:bg-accents1-dark rounded-full hover:underline bg-accents1 text-center font-grands text-fond font-semibold text-xs py-0.5 px-4"/>
-              </div>
-            </form>
+            <ShelterAnimalUpload
+              animalId={ animal.id }
+            />
           </div>     
         </div>
               

@@ -30,13 +30,11 @@ export default function RootLayout({
         </style>
       </head>
         <body className="w-screen h-screen font-body flex flex-col bg-fond">
-          <div id="root">
-            <Providers>
-              <Header />
+          <Providers>
+            <Header />
               {children}
-              <Footer />
-            </Providers>
-          </div>
+            <Footer />
+          </Providers>
         </body>
     </html>
 
