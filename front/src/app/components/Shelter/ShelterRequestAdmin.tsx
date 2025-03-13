@@ -10,7 +10,6 @@ export default function ShelterRequestAdmin({ demande }: ShelterRequestAdminProp
   const [ displayedRequest, setDisplayedRequest ] = useState(
     demande
   )
-  console.log(displayedRequest)
 
   const [userMessage, setUserMessage] = useState(null);
   
