@@ -1,15 +1,30 @@
-'use client'
+/* 'use client' */
 /* import { useParams } from 'react-router-dom'; */
 import Link from 'next/link';
-import { useState } from 'react';
+/* import { useState } from 'react';
 import { useRootContext } from '@/contexts/RootContext';
-import { useUserContext } from '@/contexts/UserContext';
+import { useUserContext } from '@/contexts/UserContext'; */
 import CarouselOfThree from '@/components/Animal/CarouselOfThree';
 import CarouselOfOne from '@/components/Animal/CarouselOfOne';
 
-function AnimalDetails({params} : any) {
+export async function generateStaticParams() {
+  const animals = await fetch(process.env.NEXT_PUBLIC_API_URL + `/animaux`).then((res) => res.json())
+ 
+  return animals.map((animal : any) => ({
+			id: animal.id.toString()
+  }))
+}
 
-	const [animalId] = params.code.split('-');
+async function AnimalDetails({
+  params,
+}: {
+  params: Promise<{ id: string}>
+}) {
+	const { id } = await params;
+
+	const animal = await fetch(process.env.NEXT_PUBLIC_API_URL + '/animaux/' + Number(id)).then((res) => res.json())
+
+/* 	const [animalId] = params.code.split('-');
 	const { animals } = useRootContext();
 	const auth = useUserContext();
 
@@ -20,10 +35,9 @@ function AnimalDetails({params} : any) {
       status: 404,
       statusText: 'Not Found',
     });
-  }
-
+  } */
 	const animalUrl = animal.images_animal[0].url;
-	const shelterUrl = animal.refuge.images_association.url;
+	const shelterUrl = animal.refuge.images_association[0].url;
 
 	const tagItems = animal.tags.map((tag: any) => (
 		<button key={tag.id} className="group p-1 rounded-lg bg-accents1-dark text-fond text-center">
@@ -34,7 +48,7 @@ function AnimalDetails({params} : any) {
 		</button>
   ))
 
-	const [ requestInfos, setRequestInfos ] = useState({
+/* 	const [ requestInfos, setRequestInfos ] = useState({
 		animalId: '',
 		familleId: '',
 	})
@@ -67,7 +81,7 @@ function AnimalDetails({params} : any) {
 		} catch (error) {
 			console.error(error);
 		}
-  }
+  } */
 
   return (
     <main className="flex flex-wrap flex-col md:flex-row justify-self-stretch flex-1 w-full place-content-evenly 2xl:w-1/2 2xl:self-center">
@@ -111,7 +125,7 @@ function AnimalDetails({params} : any) {
 			<div className="text-center w-full py-2">
 				<p className="font-body text-texte">Son petit truc en plus :<br />{animal.description}</p>
 			</div>
-				{ auth.user?.accueillant && (
+{/* 				{ auth.user?.accueillant && (
 				<div className="text-center w-full py-2">
 					{userMessage &&
 						<p className="font-grands font-base text-accents1 text-center">{userMessage}</p>
@@ -120,7 +134,7 @@ function AnimalDetails({params} : any) {
 					<button type="submit" className="mx-auto my-3 py-2 px-6 bg-accents1-light text-fond transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg">Faire une demande</button>
 					</form>
 				</div>
-				)}
+				)} */}
 		</article>
 
 	</section>
@@ -157,11 +171,12 @@ function AnimalDetails({params} : any) {
 
 	<section className="p-4 py-6 block">
 		<h2 className="font-grands text-3xl text-center my-2">Ils vous attendent de patte ferme !</h2>
-		{ window.innerWidth > 768 ? (
+{/* 		{ window.innerWidth > 768 ? (
 			<CarouselOfThree />
 		) : (
 			<CarouselOfOne />
-		)}	
+		)}	 */}
+		<CarouselOfThree />
 	</section>
 
 </main>
