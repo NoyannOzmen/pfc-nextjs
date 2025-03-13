@@ -112,12 +112,8 @@ async function AnimalDetails({
 
 	<section className="p-4 py-6 block">
 		<h2 className="font-grands text-3xl text-center my-2">Ils vous attendent de patte ferme !</h2>
-{/* 		{ window.innerWidth > 768 ? (
 			<CarouselOfThree />
-		) : (
 			<CarouselOfOne />
-		)}	 */}
-		<CarouselOfThree />
 	</section>
 
 </main>

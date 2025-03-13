@@ -1,3 +1,4 @@
+'use client'
 import { IAnimal } from "@/@types/index";
 import Link from "next/link";
 

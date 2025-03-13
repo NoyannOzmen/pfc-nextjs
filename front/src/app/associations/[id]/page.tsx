@@ -1,21 +1,22 @@
-'use client'
-import { useParams } from 'react-router-dom';
-import { useRootContext } from '@/contexts/RootContext';
 import CarouselOfThree from '@/components/Animal/CarouselOfThree';
 import CarouselOfOne from '@/components/Animal/CarouselOfOne';
 
-function ShelterDetails() {
-  const { shelterId } = useParams();
-	const { shelters } = useRootContext();
+export async function generateStaticParams() {
+  const shelters = await fetch(process.env.NEXT_PUBLIC_API_URL + `/associations`).then((res) => res.json())
+ 
+  return shelters.map((shelter : any) => ({
+			id: shelter.id.toString()
+  }))
+}
 
-	const shelter = shelters?.find(({ id }) => Number(id) === Number(shelterId));
+async function ShelterDetails({
+  params,
+}: {
+  params: Promise<{ id: string}>
+}) {
+  const { id } = await params;
+	const shelter = await fetch(process.env.NEXT_PUBLIC_API_URL + '/associations/' + Number(id)).then((res) => res.json())
 
-  if (!shelter) {
-    throw new Response('', {
-      status: 404,
-      statusText: 'Not Found',
-    });
-  }
   
   const shelterUrl = shelter.images_association[0].url;
 
@@ -52,7 +53,6 @@ function ShelterDetails() {
   <section className="p-2 block">
     <h2 className="font-grands text-xl text-center my-2 md:md:text-2xl">Ils vous y attendent de patte ferme !</h2>
       <CarouselOfOne />
-
       <CarouselOfThree />
   </section>
 </main>

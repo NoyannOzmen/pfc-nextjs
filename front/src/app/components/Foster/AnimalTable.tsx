@@ -1,3 +1,4 @@
+'use client'
 import { IAnimal } from "@/@types/index";
 
 type AnimalTableProps = {
