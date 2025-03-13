@@ -51,6 +51,16 @@ export const animalController = {
         
         res.json(demandes)
     },
+    async getFoster(req,res) {
+        const fosterId = req.params.id;
+        const famille = await Famille.findByPk(fosterId);
+        res.json(famille)
+    },
+    async getOneRequest(req,res) {
+        const demandeId = req.params.id;
+        const demande = await Demande.findByPk(demandeId);
+        res.json(demande)
+    },
     async getSearched(req,res) {
 
         const {

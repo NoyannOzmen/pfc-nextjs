@@ -17,23 +17,9 @@ async function ShelterRequestDetails({
   const { id } = await params;
   const demande = await fetch(process.env.NEXT_PUBLIC_API_URL + '/demandes/' + Number(id)).then((res) => res.json())
 
-  const animals = await fetch(process.env.NEXT_PUBLIC_API_URL + `/animaux`).then((res) => res.json())
+  const animal = await fetch(process.env.NEXT_PUBLIC_API_URL + `/animaux/` + Number(demande.animal_id)).then((res) => res.json())
 
-  function isCurrentRequest(animal : any, index : any ) {
-    return Number(animal.demandes[index].id) === Number(id);
-  }
-
-  const requested = animals.filter(( {demandes}: any ) => demandes.length )
-  const animal = requested.find(isCurrentRequest);
-
-  if (!animal) {
-    throw new Response('', {
-      status: 404,
-      statusText: 'Not Found',
-    });
-  }
-
-  const famille = animal.demandes[0];
+  const famille = await fetch(process.env.NEXT_PUBLIC_API_URL + `/famille/` + Number(demande.famille_id)).then((res) => res.json())
 
   const tagItems = animal.tags.map((tag :any) => (
     <p key={tag.id} className="group rounded-full block bg-accents1 text-fond text-center text-xs font-semibold py-1 px-2">

@@ -20,8 +20,12 @@ animalRouter.get('/especes', catchErrors(animalController.getSpeciesList));
 //* Test pour les tags
 animalRouter.get('/tags', catchErrors(animalController.getTagsList));
 
+//! Test pour accueillants
+animalRouter.get('/famille/:id(\\d+)', catchErrors(animalController.getFoster));
+
 //! Test pour les demandes
 animalRouter.get('/demandes', catchErrors(animalController.getRequestsList));
+animalRouter.get('/demandes/:id(\\d+)', catchErrors(animalController.getOneRequest));
 
 //* Rendu de la page avec les animaux correspondant à la recherche
 animalRouter.post('/animaux', catchErrors(animalController.getSearched));
