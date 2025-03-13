@@ -51,10 +51,9 @@ function CarouselOfOne() {
   ))
 
   let i = 0;
-  const carouselPics = document.querySelectorAll('.carousel-img');
 
   function getOneNextPic() {
-
+    const carouselPics = document.querySelectorAll('.carousel-img');
     if (i < carouselPics.length - 1) {
       carouselPics[i].classList.toggle('hidden');
       carouselPics[i+1].classList.toggle('hidden');
@@ -63,7 +62,7 @@ function CarouselOfOne() {
   }
 
   function getOnePreviousPic() {
-
+    const carouselPics = document.querySelectorAll('.carousel-img');
       if (i > 0) {
         carouselPics[i].classList.toggle('hidden');
         carouselPics[i-1].classList.toggle('hidden');
@@ -78,7 +77,7 @@ function CarouselOfOne() {
         <section id="animal-carousel" className="md:hidden relative mx-auto h-auto w-[90%] bg-zoning rounded-lg shadow dark:bg-gray-800">
         
         <button
-        className="absolute top-0 start-0 z-1 flex items-center justify-center h-full pl-2 cursor-pointer group focus:outline-none  size-10 opacity-75"
+        className="absolute top-0 start-0 z-1 flex items-center justify-center h-full pl-2 cursor-pointer group focus:outline-none size-10 opacity-75"
         type="button" id="previous" aria-label="Précédent" tabIndex={0}><img src="/icons/left.svg" alt="" 
         onClick={getOnePreviousPic} /></button>
         

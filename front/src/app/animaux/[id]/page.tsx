@@ -1,6 +1,5 @@
 import Link from 'next/link';
-import CarouselOfThree from '@/components/Animal/CarouselOfThree';
-import CarouselOfOne from '@/components/Animal/CarouselOfOne';
+import Carousel from '@/components/Animal/Carousel';
 import AnimalRequest from '@/components/Animal/AnimalRequest';
 
 export async function generateStaticParams() {
@@ -112,8 +111,7 @@ async function AnimalDetails({
 
 	<section className="p-4 py-6 block">
 		<h2 className="font-grands text-3xl text-center my-2">Ils vous attendent de patte ferme !</h2>
-			<CarouselOfThree />
-			<CarouselOfOne />
+			<Carousel />
 	</section>
 
 </main>

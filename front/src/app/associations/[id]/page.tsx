@@ -1,5 +1,4 @@
-import CarouselOfThree from '@/components/Animal/CarouselOfThree';
-import CarouselOfOne from '@/components/Animal/CarouselOfOne';
+import Carousel from '@/components/Animal/Carousel';
 
 export async function generateStaticParams() {
   const shelters = await fetch(process.env.NEXT_PUBLIC_API_URL + `/associations`).then((res) => res.json())
@@ -52,8 +51,7 @@ async function ShelterDetails({
 	
   <section className="p-2 block">
     <h2 className="font-grands text-xl text-center my-2 md:md:text-2xl">Ils vous y attendent de patte ferme !</h2>
-      <CarouselOfOne />
-      <CarouselOfThree />
+      <Carousel />
   </section>
 </main>
 

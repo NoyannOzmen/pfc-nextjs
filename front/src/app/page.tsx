@@ -1,9 +1,8 @@
 
 import Link from 'next/link';
-import CarouselOfThree from './components/Animal/CarouselOfThree';
-import CarouselOfOne from './components/Animal/CarouselOfOne';
+import Carousel from './components/Animal/Carousel';
 
-function HomePage() {
+export default function HomePage() {
   return (
     <main className="justify-self-stretch flex-1 flex flex-col">
       <section className="flex flex-col h-[80%] bg-right bg-cover bg-unai place-content-center">
@@ -20,11 +19,8 @@ function HomePage() {
         
       <section className="p-4 block mx-auto">
         <h2 className="font-grands text-3xl text-center my-2">Ils vous attendent de patte ferme !</h2>
-          <CarouselOfOne /> 
-          <CarouselOfThree />
+          <Carousel /> 
       </section>
     </main>
   )
 }
-  
-export default HomePage;
