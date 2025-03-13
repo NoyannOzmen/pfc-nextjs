@@ -11,6 +11,13 @@ const associationController = {
         
         res.json(associations)
     },
+    async getSingleShelter(req,res) {
+        const assoId = req.params.id;
+        const shelter = await Association.findByPk(assoId,{
+            include :  [ 'images_association', 'identifiant_association', 'pensionnaires' ]
+        })
+        res.json(shelter)
+    },
 
     async getSearched(req,res) {
         const {

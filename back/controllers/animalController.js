@@ -17,10 +17,24 @@ export const animalController = {
             ]
         })
         
-        const especes = await Espece.findAll();
-        const tags = await Tag.findAll();
+        /* const especes = await Espece.findAll();
+        const tags = await Tag.findAll(); */
         
        res.json(animals)
+    },
+    async getSingleAnimal(req,res) {
+        const animalId = req.params.id;
+        const animal = await Animal.findByPk(animalId,{
+            include : [
+                "espece",
+                "images_animal",
+                "demandes",
+                { model : Association, as : "refuge", include: ["images_association", "identifiant_association"]},
+                { model : Famille, as : "accueillant", include: ["identifiant_famille"]},
+                { model : Tag, as : "tags" },
+            ]
+        })
+        res.json(animal)
     },
      async getSpeciesList(req,res) {
         const especes = await Espece.findAll();
@@ -31,6 +45,11 @@ export const animalController = {
         const tags = await Tag.findAll();
 
         res.json(tags);
+    },
+    async getRequestsList(req,res) {
+        const demandes = await Demande.findAll();
+        
+        res.json(demandes)
     },
     async getSearched(req,res) {
 

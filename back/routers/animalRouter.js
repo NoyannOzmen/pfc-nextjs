@@ -11,11 +11,17 @@ const animalRouter = Router();
 //* Rendu de la page avec tout les animaux disponibles
 animalRouter.get('/animaux', catchErrors(animalController.availableAnimalsList));
 
+//* Un animal en particulier
+animalRouter.get('/animaux/:id(\\d+)', catchErrors(animalController.getSingleAnimal));
+
 //* Test pour les especes
 animalRouter.get('/especes', catchErrors(animalController.getSpeciesList));
 
 //* Test pour les tags
 animalRouter.get('/tags', catchErrors(animalController.getTagsList));
+
+//! Test pour les demandes
+animalRouter.get('/demandes', catchErrors(animalController.getRequestsList));
 
 //* Rendu de la page avec les animaux correspondant à la recherche
 animalRouter.post('/animaux', catchErrors(animalController.getSearched));
