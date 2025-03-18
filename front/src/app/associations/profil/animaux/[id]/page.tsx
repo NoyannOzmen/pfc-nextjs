@@ -1,10 +1,11 @@
 import Link from 'next/link';
 import ShelterAnimalUpload from '@/components/Shelter/ShelterAnimalUpload';
+import { IAnimal, ITag } from '@/@types/index';
 
 export async function generateStaticParams() {
   const animals = await fetch(process.env.NEXT_PUBLIC_API_URL + `/animaux`).then((res) => res.json())
  
-  return animals.map((animal : any) => ({
+  return animals.map((animal : IAnimal) => ({
 			id: animal.id.toString()
   }))
 }
@@ -17,7 +18,7 @@ async function ShelterResidentDetails({
   const { id } = await params;
 	const animal = await fetch(process.env.NEXT_PUBLIC_API_URL + '/animaux/' + Number(id)).then((res) => res.json())
 
-  const tagItems = animal.tags.map((tag :any) => (
+  const tagItems = animal.tags.map((tag :ITag) => (
     <p key={tag.id} className="group rounded-full block bg-accents1 text-fond text-center text-xs font-semibold py-1 px-2">
       {tag.nom}
         <span className="group-hover:block hidden z-10 bg-accents2-dark text-fond absolute px-2 py-2 text-xs rounded-b-xl rounded-tr-xl">
@@ -26,7 +27,7 @@ async function ShelterResidentDetails({
     </p>
   ))
 
-  const requestItems = animal.demandes.map((demande : any) => (
+  const requestItems = animal.demandes.map((demande : typeof animal.demandes) => (
     <tr key={demande.id} className="odd:bg-accents2-light even:bg-fond odd:text-fond text-sm font-body font-semibold p-4 rounded-lg ">
       <td className="text-center p-2 rounded-lg ">{demande.nom}</td>
       <td className="text-center p-2 rounded-lg ">{demande.Demande.date_debut}</td>

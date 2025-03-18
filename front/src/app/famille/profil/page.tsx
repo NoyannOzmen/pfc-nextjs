@@ -102,16 +102,16 @@ function FosterProfile() {
     });
   }
 
-  function allowEdit(e: any) {
-    const field = e.target.closest('fieldset')
-    const inputs = field.querySelectorAll('input')
+  function allowEdit(e: React.MouseEvent<HTMLLegendElement>) {
+    const field = e.currentTarget.closest('fieldset')
+    const inputs = field?.querySelectorAll('input')
     const validate = document.getElementById("validate");
   
   if (validate && validate.classList.contains('hidden')) {
     validate.classList.toggle('hidden')
   }
   
-  inputs.forEach((input : any) => {
+  inputs?.forEach((input : HTMLInputElement) => {
     input.disabled = false;
     input.required = true
     input.classList.add('bg-fond')
@@ -151,6 +151,7 @@ function FosterProfile() {
   function displayModal() {
     const addTagModal = document.getElementById('delete-account-modal');
     addTagModal && addTagModal.classList.toggle('hidden');
+    addTagModal && addTagModal.classList.toggle('flex');
   }
 
 
@@ -237,7 +238,7 @@ function FosterProfile() {
   </div>
 
   {/* <!-- ICI MODALE DE SUPPRESSION DE COMPTE --> */}
-  <div id="delete-account-modal" className="hidden flex justify-center content-center fixed bg-texte/20 inset-0">
+  <div id="delete-account-modal" className="hidden justify-center content-center fixed bg-texte/20 inset-0">
 
     <div className="self-center bg-zoning p-6 rounded-lg">
       <div className="flex justify-between">

@@ -1,9 +1,10 @@
+import { IAssociation } from '@/@types/index';
 import Carousel from '@/components/Animal/Carousel';
 
 export async function generateStaticParams() {
   const shelters = await fetch(process.env.NEXT_PUBLIC_API_URL + `/associations`).then((res) => res.json())
  
-  return shelters.map((shelter : any) => ({
+  return shelters.map((shelter : IAssociation) => ({
 			id: shelter.id.toString()
   }))
 }

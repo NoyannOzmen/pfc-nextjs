@@ -1,11 +1,12 @@
 import Link from 'next/link';
 import Carousel from '@/components/Animal/Carousel';
 import AnimalRequest from '@/components/Animal/AnimalRequest';
+import { IAnimal, ITag } from '@/@types/index';
 
 export async function generateStaticParams() {
   const animals = await fetch(process.env.NEXT_PUBLIC_API_URL + `/animaux`).then((res) => res.json())
  
-  return animals.map((animal : any) => ({
+  return animals.map((animal : IAnimal) => ({
 			id: animal.id.toString()
   }))
 }
@@ -21,7 +22,7 @@ async function AnimalDetails({
 	const animalUrl = animal.images_animal[0].url;
 	const shelterUrl = animal.refuge.images_association[0].url;
 
-	const tagItems = animal.tags.map((tag: any) => (
+	const tagItems = animal.tags.map((tag: ITag) => (
 		<button key={tag.id} className="group p-1 rounded-lg bg-accents1-dark text-fond text-center">
 					{tag.nom}
 					<span className="group-hover:block hidden z-10 bg-accents2-dark text-fond absolute px-2 py-2 text-xs rounded-b-xl rounded-tr-xl">

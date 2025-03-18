@@ -47,24 +47,25 @@ function ShelterResidentList() {
   function displayDropdown() {
     const searchFilters = document.getElementById('search-filters');
     searchFilters && searchFilters.classList.toggle('hidden')
+    searchFilters && searchFilters.classList.toggle('flex')
   }
 
-  function filterCards (searchFlag : any,animalCards : any) {
+  function filterCards (searchFlag : boolean, animalCards : NodeListOf<HTMLElement>) {
     
     //* On initialise et remplit un tableau avec les valeurs qui doivent filtrer 
     const speciesFilter: any[] = [];
-    const speciesCheckboxes = document.querySelectorAll('.species-checkbox');
+    const speciesCheckboxes = document.querySelectorAll('.species-checkbox') as NodeListOf<HTMLInputElement>;
     if (speciesCheckboxes) {
-    speciesCheckboxes.forEach((species : any) => {
+    speciesCheckboxes.forEach((species) => {
         if (species.checked) {
             speciesFilter.push(species.value)
         }
     });
     }
 
-    const statutFilter: any[] = [];
-    const statutCheckboxes = document.querySelectorAll('.statut-checkbox');
-    statutCheckboxes.forEach((statut : any) => {
+    const statutFilter: string[] = [];
+    const statutCheckboxes = document.querySelectorAll('.statut-checkbox') as NodeListOf<HTMLInputElement>;
+    statutCheckboxes.forEach((statut) => {
         if (statut.checked) {
             statutFilter.push(statut.value)
         }
@@ -72,17 +73,17 @@ function ShelterResidentList() {
     
     const searchBar = document.getElementById('search-bar') as HTMLInputElement;
     
-    const selectedCards = Array.from(animalCards).filter((animalCard: any)=> {
+    const selectedCards = Array.from(animalCards).filter((animalCard)=> {
       const searchArray = 
       [
-          animalCard.dataset.nom.toLowerCase(),
-          animalCard.dataset.statut.toLowerCase(),
-          animalCard.querySelector('.espece-nom').innerText.toLowerCase()
+        animalCard.dataset.nom?.toLowerCase(),
+        animalCard.dataset.statut?.toLowerCase(),
+        (animalCard.querySelector('.espece-nom') as HTMLParagraphElement).innerText.toLowerCase()
       ]
     
-      const F1 = speciesFilter.length ? speciesFilter.includes(animalCard.dataset.espece) : true;
-      const F2 = statutFilter.length ? statutFilter.includes(animalCard.dataset.statut) : true;
-      const F3 = searchArray.some(e => {return e.includes(searchBar!.value.toLowerCase())});
+      const F1 = speciesFilter.length ? speciesFilter.includes(animalCard.dataset.espece!) : true;
+      const F2 = statutFilter.length ? statutFilter.includes(animalCard.dataset.statut!) : true;
+      const F3 = searchArray.some(e => {return e!.includes(searchBar!.value.toLowerCase())});
       
       if (!searchFlag) {
           return (F1&&F2)
@@ -95,16 +96,16 @@ function ShelterResidentList() {
   }
 
   function handleSearch() {
-    const animalCards =  document.querySelectorAll('.animal_card');
+    const animalCards =  document.querySelectorAll('.animal_card') as NodeListOf<HTMLElement>;
         animalCards.forEach(animalCard => {
             animalCard.classList.add('hidden');
         });
-        const searchFlag = (document.getElementById('search-bar') as HTMLInputElement).value
+        const searchFlag = (document.getElementById('search-bar') as HTMLInputElement).value.length > 3
         
-      if (searchFlag.length > 3) {
-      const visibleCards = filterCards(searchFlag, animalCards);
+      if (searchFlag) {
+      const visibleCards = filterCards(searchFlag, animalCards) as Array<Element>;
       
-      visibleCards.forEach((visibleCard : any) => {
+      visibleCards.forEach((visibleCard) => {
           visibleCard.classList.remove('hidden');
       });
     }
@@ -120,7 +121,7 @@ function ShelterResidentList() {
       allStatutCheckbox!.checked=false
   }
   
-  const animalCards =  document.querySelectorAll('.animal_card');
+  const animalCards =  document.querySelectorAll('.animal_card') as NodeListOf<HTMLElement>;
   animalCards.forEach(animalCard => {
       animalCard.classList.add('hidden');
   });
@@ -128,12 +129,12 @@ function ShelterResidentList() {
   
   const visibleCards = filterCards(searchFlag, animalCards);
   
-  visibleCards.forEach((visibleCard : any) => {
+  visibleCards.forEach((visibleCard) => {
       visibleCard.classList.remove('hidden');
   });
   }
 
-  function handleSubmit(e: any) {
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
   }
 
@@ -180,7 +181,7 @@ function ShelterResidentList() {
                   </span>
               </div>
               
-              <div key={"shelteredFilter"} id="search-filters" className="flex gap-4 hidden md:bg-fond p-4 rounded-lg border-accents2 md:border-4">
+              <div key={"shelteredFilter"} id="search-filters" className="gap-4 hidden md:bg-fond p-4 rounded-lg border-accents2 md:border-4">
                 <fieldset key={"first"}>
                   {speciesItems}
                   <div key={"all"} className="flex gap-x-1.5 content-center"> 

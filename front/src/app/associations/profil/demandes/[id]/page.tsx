@@ -1,10 +1,11 @@
 import Link from 'next/link';
 import ShelterRequestAdmin from '@/components/Shelter/ShelterRequestAdmin';
+import { IDemande, ITag } from '@/@types/index';
 
 export async function generateStaticParams() {
   const demandes = await fetch(process.env.NEXT_PUBLIC_API_URL + `/demandes`).then((res) => res.json())
  
-  return demandes.map((demande : any) => ({
+  return demandes.map((demande : IDemande) => ({
 			id: demande.id.toString()
   }))
 }
@@ -21,7 +22,7 @@ async function ShelterRequestDetails({
 
   const famille = await fetch(process.env.NEXT_PUBLIC_API_URL + `/famille/` + Number(demande.famille_id)).then((res) => res.json())
 
-  const tagItems = animal.tags.map((tag :any) => (
+  const tagItems = animal.tags.map((tag :ITag) => (
     <p key={tag.id} className="group rounded-full block bg-accents1 text-fond text-center text-xs font-semibold py-1 px-2">
       {tag.nom}
       <span className="group-hover:block hidden z-10 bg-accents2-dark text-fond absolute px-2 py-2 text-xs rounded-b-xl rounded-tr-xl">
