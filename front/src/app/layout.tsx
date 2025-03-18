@@ -3,6 +3,16 @@ import './globals.css'
 import { Providers } from './providers';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
+import 'material-symbols';
+import { Grandstander, Noto_Sans} from 'next/font/google';
+
+const grand = Grandstander ({
+  subsets : ['latin'],
+})
+
+const noto = Noto_Sans ({
+  subsets : ['latin'],
+})
 
 export const metadata: Metadata = {
   title: 'Pet Foster Connect',
@@ -16,20 +26,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="fr">
-      <head>
-        <link rel="preconnect" href="https://fonts.gstatic.com" />
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-        <style>
-          @import url('https://fonts.googleapis.com/css2?family=Grandstander:ital,wght@0,100..900;1,100..900&display=swap');
-        </style>
-        <style>
-          @import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20,400,0,0');
-        </style>
-        <style>
-          @import url('https://fonts.googleapis.com/css2?family=Grandstander:ital,wght@0,100..900;1,100..900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
-        </style>
-      </head>
-        <body className="w-screen h-screen font-body flex flex-col bg-fond">
+        <body className={`${noto.className} ${grand.className} w-screen h-screen font-body flex flex-col bg-fond`}>
           <Providers>
             <Header />
               {children}
