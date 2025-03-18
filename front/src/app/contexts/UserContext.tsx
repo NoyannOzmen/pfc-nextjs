@@ -1,6 +1,6 @@
 'use client'
 import { createContext, useContext, useState, useEffect } from 'react';
-/* import { useNavigate } from 'react-router-dom'; */
+import { useRouter } from 'next/navigation'
 import { IUtilisateur } from '@/@types/index';
 
 type UserContextType = {
@@ -37,7 +37,7 @@ export default function UserContextProvider({
 
   const [userMessage, setUserMessage] = useState(null);
   /* const [token, setToken] = useState(sessionStorage.getItem("site") || ""); */
-  /* const navigate = useNavigate(); */
+  const router = useRouter()
 
   async function logIn(credentials: { email: string; mot_de_passe : string}) {
 
@@ -56,13 +56,13 @@ export default function UserContextProvider({
 
       if (!res.ok) {
         setUserMessage(res.message)
-        
+        router.push('/connexion')        
       }
       if (res) {
         setUser(res);
         /* setToken(res.token); */
         sessionStorage.setItem("site", res.token);
-        
+        router.push('/')
       }
     } catch (error) {
       console.error(error);
@@ -73,7 +73,7 @@ export default function UserContextProvider({
     setUser(null)
     /* setToken(''); */
     sessionStorage.removeItem("site");
-   /*  navigate('/') */
+    router.push('/')
   };
 
   return (
