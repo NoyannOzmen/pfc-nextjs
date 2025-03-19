@@ -6,7 +6,7 @@ type ShelterRequestTableProps = {
   animal: IAnimal;
 }
 
-function ShelterRequestTable({ animal }: ShelterRequestTableProps) {
+export default function ShelterRequestTable({ animal }: ShelterRequestTableProps) {
 
   function handleClick(e: React.MouseEvent<HTMLTableRowElement>) {
     const fold = e.currentTarget.nextElementSibling;
@@ -41,6 +41,4 @@ function ShelterRequestTable({ animal }: ShelterRequestTableProps) {
         ))}
     </tbody>
   )
-};
-
-export default ShelterRequestTable;
+}

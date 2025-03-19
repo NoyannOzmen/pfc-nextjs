@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { useUserContext } from "@/contexts/UserContext";
 import { useRootContext } from '@/contexts/RootContext';
 import ShelterRequestTable from "@/components/Shelter/ShelterRequestTable";
+import { isShelter } from '@/components/isAuth';
 
 function ShelterRequestList() {
   const { animals } = useRootContext();
@@ -69,4 +70,4 @@ function ShelterRequestList() {
   )
 }
 
-export default ShelterRequestList;
+export default isShelter(ShelterRequestList)

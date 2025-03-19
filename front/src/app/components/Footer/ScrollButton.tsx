@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-const ScrollButton = () => {
+export default function ScrollButton() {
 
     const [visible, setVisible] = useState(false);
 
@@ -35,6 +35,4 @@ const ScrollButton = () => {
         </Link>
       </div>
     );
-};
-
-export default ScrollButton;
+}

@@ -6,7 +6,7 @@ type AnimalRequestProps = {
   animalId: string;
 }
 
-const AnimalRequest = ({ animalId }: AnimalRequestProps) => {
+export default function AnimalRequest({ animalId }: AnimalRequestProps) {
   const auth = useUserContext();
 
   const [ requestInfos, setRequestInfos ] = useState({
@@ -59,5 +59,3 @@ const AnimalRequest = ({ animalId }: AnimalRequestProps) => {
     </>
   )
 }
-
-export default AnimalRequest;

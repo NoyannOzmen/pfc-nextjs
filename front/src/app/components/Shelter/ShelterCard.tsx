@@ -5,7 +5,7 @@ type ShelterCardProps = {
   shelter: IAssociation;
 }
 
-const ShelterCard = ({ shelter }: ShelterCardProps) => {
+export default function ShelterCard({ shelter }: ShelterCardProps) {
   const url = shelter.images_association[0].url;
     return (
   <div className="bg-zoning rounded-lg shadow dark:bg-gray-800 flex flex-col">
@@ -30,5 +30,3 @@ const ShelterCard = ({ shelter }: ShelterCardProps) => {
   </div>
     )
 }
-
-export default ShelterCard;

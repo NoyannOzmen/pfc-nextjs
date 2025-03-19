@@ -5,7 +5,7 @@ type AnimalTableProps = {
   animal: IAnimal;
 }
 
-function AnimalTable({ animal }: AnimalTableProps) {
+export default function AnimalTable({ animal }: AnimalTableProps) {
 
   function handleClick(e: React.MouseEvent<HTMLTableRowElement>) {
     const fold = e.currentTarget.nextElementSibling;
@@ -33,6 +33,4 @@ function AnimalTable({ animal }: AnimalTableProps) {
       </tr>
     </tbody>
   )
-};
-
-export default AnimalTable;
+}

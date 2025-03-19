@@ -2,7 +2,7 @@
 import Link from 'next/link';
 import HeaderNav from './HeaderNav';
 
-function Header() {
+export default function Header() {
   function mobileMenu() {
     const hamburger = document.querySelector(".hamburger");
     const navMenu = document.querySelector("#nav-links");
@@ -101,5 +101,3 @@ function Header() {
 
   )
 }
-
-export default Header;

@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-function ErrorPage() {
+export default function Custom404() {
   return (
     <main className="justify-self-stretch flex-1">
       <div className="my-12 flex items-center justify-center">
@@ -18,5 +18,3 @@ function ErrorPage() {
     </main>
   )
 }
-
-export default ErrorPage;

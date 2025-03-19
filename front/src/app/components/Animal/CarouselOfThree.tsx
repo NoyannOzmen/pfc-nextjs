@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import Link from 'next/link';
 import { useRootContext } from '@/contexts/RootContext';
 
-function CarouselOfThree() {
+export default function CarouselOfThree() {
   const { animals } = useRootContext();
 
   const { animalId } = useParams();
@@ -94,5 +94,3 @@ function CarouselOfThree() {
     </>
   )
 }
-
-export default CarouselOfThree;

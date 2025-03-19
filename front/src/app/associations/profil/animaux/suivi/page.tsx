@@ -3,18 +3,12 @@ import Link from 'next/link';
 import { useRootContext } from '@/contexts/RootContext';
 import { useUserContext } from "@/contexts/UserContext";
 import ShelterResidentTable from "@/components/Shelter/ShelterResidentTable";
+import { isShelter } from '@/components/isAuth';
 
 function ShelterResidentProfileList() {
   const { animals } = useRootContext();
   const auth = useUserContext();
 
-/*   if (!user) {
-    throw new Response('', {
-      status: 404,
-      statusText: 'Not Found',
-    });
-  }
- */
   const fostered = animals.filter(({ association_id, statut }) => Number(association_id) === Number(auth.user?.id) && statut === "Accueilli");
 
   const fosteredItems = fostered.map((animal) => (
@@ -70,4 +64,4 @@ function ShelterResidentProfileList() {
   )
 }
 
-export default ShelterResidentProfileList;
+export default isShelter(ShelterResidentProfileList)

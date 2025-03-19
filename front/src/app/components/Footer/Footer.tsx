@@ -1,7 +1,7 @@
 import Link from 'next/link';;
 import ScrollButton from './ScrollButton';
 
-function Footer() {
+export default function Footer() {
   return (
   <>
       <ScrollButton />
@@ -33,5 +33,3 @@ function Footer() {
 
   )
 }
-
-export default Footer;

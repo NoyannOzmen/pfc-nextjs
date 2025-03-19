@@ -1,4 +1,4 @@
-function Rgpd() {
+export default function Rgpd() {
   return (
     <main className="justify-self-stretch flex-1">
   <article className="p-32 mx-auto">
@@ -33,5 +33,3 @@ function Rgpd() {
 </main>
   )
 }
-
-export default Rgpd;

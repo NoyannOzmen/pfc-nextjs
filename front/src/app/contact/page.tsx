@@ -1,7 +1,7 @@
 'use client'
 import Link from 'next/link';;
 
-function Contact() {
+export default function Contact() {
   
   return (
 		<main className="justify-self-stretch flex-1">
@@ -47,6 +47,4 @@ function Contact() {
 			</section>
 		</main>
   )
-};
-
-export default Contact;
+}

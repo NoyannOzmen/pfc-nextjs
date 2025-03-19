@@ -6,7 +6,7 @@ type ShelterResidentTableProps = {
   animal: IAnimal;
 }
 
-function ShelterResidentTable({ animal }: ShelterResidentTableProps) {
+export default function ShelterResidentTable({ animal }: ShelterResidentTableProps) {
 
   function handleClick(e: React.MouseEvent<HTMLTableRowElement>) {
     const fold = e.currentTarget.nextElementSibling;
@@ -123,6 +123,4 @@ function ShelterResidentTable({ animal }: ShelterResidentTableProps) {
       </tr>
     </tbody>
   )
-};
-
-export default ShelterResidentTable;
+}

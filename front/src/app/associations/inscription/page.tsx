@@ -2,7 +2,7 @@
 
 import { useEffect, useState, useRef } from "react";
 
-function ShelterSignIn() {
+export default function ShelterSignIn() {
   const isInitialMount = useRef(true);
 
   const [shelterInfos, setShelterInfos ] = useState({
@@ -236,5 +236,3 @@ function ShelterSignIn() {
 
   )
 }
-
-export default ShelterSignIn;

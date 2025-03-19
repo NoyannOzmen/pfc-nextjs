@@ -3,7 +3,7 @@ import { useRootContext } from '@/contexts/RootContext';
 import { useParams} from 'react-router-dom';
 import Link from 'next/link';
 
-function CarouselOfOne() {
+export default function CarouselOfOne() {
   const { animals } = useRootContext();
   const { animalId } = useParams();
   const { shelterId } = useParams();
@@ -95,5 +95,3 @@ function CarouselOfOne() {
     </>
   )
 }
-
-export default CarouselOfOne;

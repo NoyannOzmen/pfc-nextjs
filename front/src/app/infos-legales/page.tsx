@@ -1,6 +1,6 @@
 import Link from 'next/link';;
 
-function InfosLegales() {
+export default function InfosLegales() {
   
   return (
 <main className="justify-self-stretch flex-1">
@@ -84,6 +84,4 @@ function InfosLegales() {
   </article>
   </main>
   )
-};
-
-export default InfosLegales;
+}
