@@ -20,21 +20,15 @@ type UserContextProviderProps = {
 
 export const UserContext = createContext<UserContextType | null>(null);
 
-const getInitialState = () => {
-  let sessionStorage : any;
-  if (!sessionStorage) {
-    return null
-  }
+/* const getInitialState = () => {
   const user = sessionStorage!.getItem("user");
   return user ? JSON.parse(user) : null
-
-}
+} */
 
 export default function UserContextProvider({
   children,
 }: UserContextProviderProps) {
-  /* const [user, setUser] = useState<IUtilisateur | null>(null); */
-  const [user, setUser] = useState(getInitialState);
+  const [user, setUser] = useState<IUtilisateur | null>(null);
 
   useEffect(() => {
     sessionStorage!.setItem("user", JSON.stringify(user))
