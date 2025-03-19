@@ -3,7 +3,7 @@
 import { useEffect, useState, useRef } from "react";
 import { useUserContext } from "@/contexts/UserContext";
 
-function Login() {
+export default function Login() {
   const inputRef = useRef<HTMLInputElement>(null);
   
   const [credentials, setCredentials] = useState({
@@ -64,6 +64,4 @@ function Login() {
 
     </main>
   )
-};
-
-export default Login;
+}

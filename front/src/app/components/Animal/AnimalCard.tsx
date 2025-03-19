@@ -5,7 +5,7 @@ type AnimalCardProps = {
   animal: IAnimal;
 }
 
-const AnimalCard = ({ animal }: AnimalCardProps) => {
+export default function AnimalCard({ animal }: AnimalCardProps) {
   const url = animal.images_animal[0].url;
 
     return (
@@ -33,5 +33,3 @@ const AnimalCard = ({ animal }: AnimalCardProps) => {
     </div>
     )
 }
-
-export default AnimalCard;

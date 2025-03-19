@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-function Plan() {
+export default function Plan() {
   
   return (
 <main className="justify-self-stretch flex-1">
@@ -24,6 +24,4 @@ function Plan() {
   </article>
 </main>
   )
-};
-
-export default Plan;
+}

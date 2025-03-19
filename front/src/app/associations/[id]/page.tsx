@@ -9,7 +9,7 @@ export async function generateStaticParams() {
   }))
 }
 
-async function ShelterDetails({
+export default async function ShelterDetails({
   params,
 }: {
   params: Promise<{ id: string}>
@@ -60,5 +60,3 @@ async function ShelterDetails({
 
   )
 }
-
-export default ShelterDetails;

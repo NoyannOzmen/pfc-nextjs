@@ -1,4 +1,4 @@
-function Faq() {
+export default function Faq() {
   
   return (
 <main className="justify-self-stretch flex-1">
@@ -19,6 +19,4 @@ function Faq() {
   </article>
   </main>
   )
-};
-
-export default Faq;
+}

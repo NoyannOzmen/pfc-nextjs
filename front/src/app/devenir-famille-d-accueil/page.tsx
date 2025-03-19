@@ -1,4 +1,4 @@
-function DevenirFamille() {
+export default function DevenirFamille() {
   
   return (
 <main className="justify-self-stretch flex-1">
@@ -66,6 +66,4 @@ function DevenirFamille() {
 </main>
 
   )
-};
-
-export default DevenirFamille;
+}

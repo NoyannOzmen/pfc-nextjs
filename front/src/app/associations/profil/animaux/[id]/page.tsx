@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import ShelterAnimalUpload from '@/components/Shelter/ShelterAnimalUpload';
 import { IAnimal, ITag } from '@/@types/index';
+import { isShelter } from '@/components/isAuth';
 
 export async function generateStaticParams() {
   const animals = await fetch(process.env.NEXT_PUBLIC_API_URL + `/animaux`).then((res) => res.json())
@@ -184,4 +185,4 @@ async function ShelterResidentDetails({
   )
 }
 
-export default ShelterResidentDetails;
+export default isShelter(ShelterResidentDetails)

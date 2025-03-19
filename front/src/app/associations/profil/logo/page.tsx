@@ -1,21 +1,14 @@
 'use client'
-
 import Link from 'next/link';
 import { useState } from "react";
 import { useUserContext } from "@/contexts/UserContext";
 import { useRootContext } from '@/contexts/RootContext';
+import { isShelter } from '@/components/isAuth';
 
 function ShelterUploadPage() {
   const [file, setFile] = useState<File | null>(null);
   const auth = useUserContext();
   const { shelters } = useRootContext();
-
-/*   if (!user) {
-    throw new Response('', {
-      status: 404,
-      statusText: 'Not Found',
-    });
-  } */
 
   const shelter = shelters.find(({id}) => Number(id) === Number(auth.user?.refuge.id));
 
@@ -113,4 +106,4 @@ function ShelterUploadPage() {
   )
 }
 
-export default ShelterUploadPage;
+export default isShelter(ShelterUploadPage)

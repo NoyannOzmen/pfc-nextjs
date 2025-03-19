@@ -6,7 +6,7 @@ import DptSelect from '@/components/Animal/DptSelect';
 import { IAnimal } from '@/@types/index';
 
 
-function AnimalList() {
+export default function AnimalList() {
   const { animals } = useRootContext();
   const { species } = useRootContext();
   const { tags } = useRootContext();
@@ -193,5 +193,3 @@ function AnimalList() {
     </main>
   )
 }
-
-export default AnimalList;

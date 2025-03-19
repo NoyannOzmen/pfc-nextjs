@@ -1,5 +1,4 @@
-function APropos() {
-  
+export default function APropos() {
   return (
 		<main className="justify-self-stretch flex-1">
 			<article className="flex flex-col p-2 lg:p-32 mx-auto">
@@ -47,6 +46,4 @@ function APropos() {
 			</article>
 		</main>
   )
-};
-
-export default APropos;
+}

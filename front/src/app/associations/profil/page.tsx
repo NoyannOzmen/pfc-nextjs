@@ -1,21 +1,12 @@
 'use client'
-
-/* import { useNavigate } from "react-router-dom"; */
 import Link from 'next/link';
 import { useEffect, useState, useRef } from "react";
 import { useUserContext } from "@/contexts/UserContext";
+import { isShelter } from '@/components/isAuth';
 
 function ShelterDashboard() {
   const isInitialMount = useRef(true);
   const auth = useUserContext();
-
-   /* if (!user) {
-    throw new Response('', {
-      status: 404,
-      statusText: 'Not Found',
-    });
-  } */
-
   const shelter = auth.user?.refuge;
 
   const [updatedInfos, setUpdatedInfos ] = useState({
@@ -303,4 +294,4 @@ function ShelterDashboard() {
   )
 }
 
-export default ShelterDashboard;
+export default isShelter(ShelterDashboard)

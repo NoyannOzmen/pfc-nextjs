@@ -5,7 +5,7 @@ import { useRootContext } from '@/contexts/RootContext';
 import ShelterCard from "@/components/Shelter/ShelterCard";
 import DptSelect from '@/components/Animal/DptSelect';
 
-function ShelterList() {
+export default function ShelterList() {
   const { shelters } = useRootContext();
   const { species } = useRootContext();
 
@@ -170,6 +170,4 @@ function ShelterList() {
       
     </main>
   )
-};
-
-export default ShelterList;
+}

@@ -4,20 +4,12 @@ import { useEffect, useState, useRef } from "react";
 import { useRootContext } from '@/contexts/RootContext';
 import { useUserContext } from "@/contexts/UserContext";
 import { ITag } from '@/@types/index';
+import { isShelter } from '@/components/isAuth';
 
 function ShelterResidentAddProfile() {
   const { species, tags } = useRootContext();
-
   const isInitialMount = useRef(true);
-
   const auth = useUserContext();
-
- /*  if (!user) {
-   throw new Response('', {
-     status: 404,
-     statusText: 'Not Found',
-   });
- } */
 
   const [animalInfos, setAnimalInfos ] = useState({
     association_id: '',
@@ -339,4 +331,4 @@ function ShelterResidentAddProfile() {
   )
 }
 
-export default ShelterResidentAddProfile;
+export default isShelter(ShelterResidentAddProfile)

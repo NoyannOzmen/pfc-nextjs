@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import ShelterRequestAdmin from '@/components/Shelter/ShelterRequestAdmin';
 import { IDemande, ITag } from '@/@types/index';
+import { isShelter } from '@/components/isAuth';
 
 export async function generateStaticParams() {
   const demandes = await fetch(process.env.NEXT_PUBLIC_API_URL + `/demandes`).then((res) => res.json())
@@ -164,4 +165,4 @@ async function ShelterRequestDetails({
   )
 }
 
-export default ShelterRequestDetails;
+export default isShelter(ShelterRequestDetails)

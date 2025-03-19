@@ -11,7 +11,7 @@ export async function generateStaticParams() {
   }))
 }
 
-async function AnimalDetails({
+export default async function AnimalDetails({
   params,
 }: {
   params: Promise<{ id: string}>
@@ -119,6 +119,4 @@ async function AnimalDetails({
 
 
   )
-};
-
-export default AnimalDetails;
+}

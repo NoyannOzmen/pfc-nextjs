@@ -2,18 +2,12 @@
 import Link from 'next/link';
 import { useRootContext } from '@/contexts/RootContext';
 import { useUserContext } from "@/contexts/UserContext";
+import { isShelter } from '@/components/isAuth';
 
 function ShelterResidentList() {
   const { animals } = useRootContext();
   const { species } = useRootContext();
   const auth = useUserContext();
-
-  /* if (!user) {
-    throw new Response('', {
-      status: 404,
-      statusText: 'Not Found',
-    });
-  } */
 
   const sheltered = animals.filter(({ association_id }) => Number(association_id) === Number(auth.user?.id));
 
@@ -224,4 +218,4 @@ function ShelterResidentList() {
   )
 }
 
-export default ShelterResidentList;
+export default isShelter(ShelterResidentList)

@@ -3,7 +3,7 @@ import { useUserContext } from "@/contexts/UserContext";
 import HeaderLogged from "./HeaderLogged";
 import HeaderLogin from "./HeaderLogin";
 
-function HeaderNav() {
+export default function HeaderNav() {
   const auth = useUserContext();
 
   function closeMenu() {
@@ -28,5 +28,3 @@ function HeaderNav() {
   </nav>
   )
 }
-
-export default HeaderNav;

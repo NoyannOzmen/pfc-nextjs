@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { useUserContext } from "@/contexts/UserContext";
 
-function HeaderLogged() {
+export default function HeaderLogged() {
 
  const auth = useUserContext();
 
@@ -30,5 +30,3 @@ function HeaderLogged() {
     </>
   )
 }
-
-export default HeaderLogged;

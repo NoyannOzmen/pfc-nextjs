@@ -5,6 +5,7 @@ import { useUserContext } from "@/contexts/UserContext";
 import { useRootContext } from '@/contexts/RootContext';
 import AnimalTable from "@/components/Foster/AnimalTable";
 import { IAnimal } from '@/@types/index';
+import { isFoster } from '@/components/isAuth';
 
 function FosterRequest() {
   const { animals } = useRootContext();
@@ -74,4 +75,4 @@ function FosterRequest() {
   )
 }
 
-export default FosterRequest;
+export default isFoster(FosterRequest);
