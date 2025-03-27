@@ -21,7 +21,10 @@ export default function ShelterRequestAdmin({ demande }: ShelterRequestAdminProp
         (process.env.NEXT_PUBLIC_API_URL + `/associations/profil/demandes/${demande.id}/accept`,
         {
           method: 'POST',
-          headers: { "Content-type" : "application/json" },
+          headers: { 
+            "Content-type" : "application/json",
+            "Authorization": `Bearer ${sessionStorage.getItem("site")}`
+          },
           body: '',
         }
       );
@@ -65,7 +68,10 @@ export default function ShelterRequestAdmin({ demande }: ShelterRequestAdminProp
         (process.env.NEXT_PUBLIC_API_URL + `/associations/profil/demandes/${demande.id}/deny`,
         {
           method: 'POST',
-          headers: { "Content-type" : "application/json" },
+          headers: { 
+            "Content-type" : "application/json",
+            "Authorization": `Bearer ${sessionStorage.getItem("site")}`
+          },
           body: '',
         }
       );

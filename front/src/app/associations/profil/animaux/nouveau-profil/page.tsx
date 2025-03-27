@@ -50,7 +50,10 @@ function ShelterResidentAddProfile() {
           (process.env.NEXT_PUBLIC_API_URL + `/animaux/nouveau-profil`,
           {
             method: 'POST',
-            headers: { "Content-type" : "application/json" },
+            headers: {
+              "Content-type" : "application/json",
+              "Authorization": `Bearer ${sessionStorage.getItem("site")}`
+            },
             body: JSON.stringify(animalInfos),
           }
         );
@@ -109,7 +112,10 @@ function ShelterResidentAddProfile() {
           (process.env.NEXT_PUBLIC_API_URL + `/tags/create`,
           {
             method: 'POST',
-            headers: { "Content-type" : "application/json" },
+            headers: {
+              "Content-type" : "application/json",
+              "Authorization": `Bearer ${sessionStorage.getItem("site")}`
+            },
             body: JSON.stringify(tagInfos),
           }
         );

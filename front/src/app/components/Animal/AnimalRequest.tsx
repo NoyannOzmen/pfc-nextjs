@@ -32,7 +32,10 @@ export default function AnimalRequest({ animalId }: AnimalRequestProps) {
 				(process.env.NEXT_PUBLIC_API_URL + `/animaux/${animalId}/faire-une-demande`,
 				{
 					method: 'POST',
-					headers: { "Content-type" : "application/json" },
+					headers: {
+            "Content-type" : "application/json",
+            "Authorization": `Bearer ${sessionStorage.getItem("site")}`
+           },
 					body: JSON.stringify(requestInfos),
 				}
 			);

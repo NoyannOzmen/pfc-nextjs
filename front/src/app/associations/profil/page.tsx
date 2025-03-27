@@ -49,7 +49,10 @@ function ShelterDashboard() {
         (process.env.NEXT_PUBLIC_API_URL + `/associations/profil`,
         {
           method: 'POST',
-          headers: { "Content-type" : "application/json" },
+          headers: {
+            "Content-type" : "application/json",
+            "Authorization": `Bearer ${sessionStorage.getItem("site")}`
+          },
           body: JSON.stringify(updatedInfos),
         }
       );
