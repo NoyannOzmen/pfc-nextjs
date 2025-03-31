@@ -6,8 +6,8 @@ import { IUtilisateur } from '@/@types/index';
 type UserContextType = {
   user: IUtilisateur | null;
   setUser: React.Dispatch<React.SetStateAction<IUtilisateur | null>>;
-  /* token: string | null;
-  setToken: React.Dispatch<React.SetStateAction<string | null>>; */
+  token: string | null;
+  /* setToken: React.Dispatch<React.SetStateAction<string | null>>; */
   userMessage: string | null;
   /* setUserMessage : React.Dispatch<React.SetStateAction<string | null>>; */
   logIn : (credentials : { email: string; mot_de_passe : string}) => Promise<void>;
@@ -35,7 +35,7 @@ export default function UserContextProvider({
 }, [user])
 
   const [userMessage, setUserMessage] = useState(null);
-  /* const [token, setToken] = useState(sessionStorage.getItem("site") || ""); */
+  const [token, setToken] = useState("");
   const router = useRouter()
 
   async function logIn(credentials: { email: string; mot_de_passe : string}) {
@@ -58,9 +58,9 @@ export default function UserContextProvider({
         router.push('/connexion')        
       }
       if (res) {
-        setUser(res);
-        /* setToken(res.token); */
-        sessionStorage.setItem("site", res.token);
+        res.user ? setUser(res.user) : setUser(res);
+        setToken(res.access_token);
+        sessionStorage.setItem("site", res.access_token);
         router.push('/')
       }
     } catch (error) {
@@ -70,13 +70,13 @@ export default function UserContextProvider({
 
   async function logOut() : Promise<void> {
     setUser(null)
-    /* setToken(''); */
+    setToken('');
     sessionStorage.removeItem("site");
     router.push('/')
   };
 
   return (
-    <UserContext.Provider value={{ user, setUser, /* token, */ userMessage, logIn, logOut}}>{children}</UserContext.Provider>
+    <UserContext.Provider value={{ user, setUser, token, userMessage, logIn, logOut}}>{children}</UserContext.Provider>
   );
 }
 export function useUserContext() {

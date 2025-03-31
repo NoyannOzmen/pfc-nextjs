@@ -29,7 +29,9 @@ function ShelterUploadPage() {
           (process.env.NEXT_PUBLIC_API_URL + `/upload/logo`,
           {
             method: 'POST',
-            /* headers: { "Content-type" : "multipart/form-data" }, */
+            headers: {
+              "Authorization": `Bearer ${sessionStorage.getItem("site")}`
+            },
             body: formData
           }
         );

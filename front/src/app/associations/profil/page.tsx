@@ -49,7 +49,10 @@ function ShelterDashboard() {
         (process.env.NEXT_PUBLIC_API_URL + `/associations/profil`,
         {
           method: 'POST',
-          headers: { "Content-type" : "application/json" },
+          headers: {
+            "Content-type" : "application/json",
+            "Authorization": `Bearer ${sessionStorage.getItem("site")}`
+          },
           body: JSON.stringify(updatedInfos),
         }
       );
@@ -190,8 +193,8 @@ function ShelterDashboard() {
 
             {/* <!-- Président --> */}
             <div className="mx-auto p-2">
-              <label className="text-center" htmlFor="president">Président</label>
-              <input className="block" type="text" id="president" name="president" defaultValue={shelter?.responsable} disabled />
+              <label className="text-center" htmlFor="responsable">Président</label>
+              <input className="block" type="text" id="responsable" name="responsable" defaultValue={shelter?.responsable} disabled />
             </div>
 
             {/* <!-- Rue --> */}

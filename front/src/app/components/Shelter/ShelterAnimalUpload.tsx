@@ -24,6 +24,9 @@ export default function ShelterAnimalUpload({ animalId }: ShelterAnimalUploadPro
           (process.env.NEXT_PUBLIC_API_URL + `/upload/photo`,
           {
             method: 'POST',
+            headers: { 
+            "Authorization": `Bearer ${sessionStorage.getItem("site")}`
+            },
             body: formData
           }
         );

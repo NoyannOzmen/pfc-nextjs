@@ -22,7 +22,7 @@ export default async function AnimalDetails({
 	const animalUrl = animal.images_animal[0].url;
 	const shelterUrl = animal.refuge.images_association[0].url;
 
-	const tagItems = animal.tags.map((tag: ITag) => (
+	const tagItems = animal.tags?.map((tag: ITag) => (
 		<button key={tag.id} className="group p-1 rounded-lg bg-accents1-dark text-fond text-center">
 					{tag.nom}
 					<span className="group-hover:block hidden z-10 bg-accents2-dark text-fond absolute px-2 py-2 text-xs rounded-b-xl rounded-tr-xl">
