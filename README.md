@@ -4,7 +4,7 @@
 
 ## Disclaimer
 
-Ce dépôt contient une conversion en ReactJs et TypeScript du projet PetFosterConnect, tout en préservant ses fonctionnalités.
+Ce dépôt contient une conversion en NextJs et TypeScript du projet PetFosterConnect, tout en préservant ses fonctionnalités.
 
 ## Présentation
 
@@ -18,14 +18,13 @@ PFC a pour vocation de répondre à plusieurs besoins :
 - Permettre aux associations / refuges de communiquer sur les animaux nécessitant une place au chaud
 - Permettre aux familles d'accueil de se faire connaître et de se mettre en relation avec les refuges / associations
 
-## Technologie utilisées
+## Technologies utilisées
 
 Pour réaliser cette application, nous nous sommes servis de :
 
 |   **Nom**      |     **Utilité**   |
 | -------------- | ----------------- |
-| VSCode | IDE |
-| ReactJS | Front |
+| NextJS | Framework Front |
 | TypeScript & JSX | Langages Front |
 | Tailwind | CSS |
 | NodeJs | Back |
