@@ -1,6 +1,6 @@
 'use client'
 import { useRootContext } from '@/contexts/RootContext';
-import { useParams} from 'react-router-dom';
+import { useParams } from 'next/navigation';
 import Link from 'next/link';
 
 export default function CarouselOfOne() {
