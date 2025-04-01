@@ -7,7 +7,6 @@ const app = express();
 
 import { router } from './routers/router.js';
 import { errorHandler, notFound } from './middlewares/errorHandlers.js';
-import { userMiddleware } from './middlewares/user.js';
 
 app.use(
     cors({
@@ -37,12 +36,8 @@ app.use(
     })
 );
 
-app.use(userMiddleware);
-
 app.use(router);
-
 app.use(notFound);
-
 app.use(errorHandler);
 
 const port = process.env.PORT || 3000;

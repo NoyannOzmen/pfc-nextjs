@@ -35,6 +35,7 @@ Pour réaliser cette application, nous nous sommes servis de :
 | cors | Protection XSS |
 | multer | Upload des images |
 | bCrypt | Chiffrement |
+| JWT | Authentification |
 | JOI | Validation |
 | PostgreSQL | Base de données |
 | sequelize | ORM |
