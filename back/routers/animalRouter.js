@@ -14,29 +14,30 @@ animalRouter.get('/animaux', catchErrors(animalController.availableAnimalsList))
 //* Un animal en particulier
 animalRouter.get('/animaux/:id(\\d+)', catchErrors(animalController.getSingleAnimal));
 
-//* Test pour les especes
+//* Liste toutes les especes
 animalRouter.get('/especes', catchErrors(animalController.getSpeciesList));
 
-//* Test pour les tags
+//* Liste tous les tags
 animalRouter.get('/tags', catchErrors(animalController.getTagsList));
 
-//! Test pour accueillants
-animalRouter.get('/famille/:id(\\d+)', catchErrors(animalController.getFoster));
+//! Liste tous les accueillants
+animalRouter.get('/famille/:id(\\d+)', [auth,isRole.association], catchErrors(animalController.getFoster));
 
-//! Test pour les demandes
+//! Liste toutes les demandes
 animalRouter.get('/demandes', catchErrors(animalController.getRequestsList));
-animalRouter.get('/demandes/:id(\\d+)', catchErrors(animalController.getOneRequest));
+//! Une demande en particulier
+animalRouter.get('/demandes/:id(\\d+)', [auth,isRole.association], catchErrors(animalController.getOneRequest));
 
 //* Rendu de la page avec les animaux correspondant à la recherche
 animalRouter.post('/animaux', catchErrors(animalController.getSearched));
 
 //* Route de demande d'accueil d'un animal par un.e user
-animalRouter.post('/animaux/:id(\\d+)/faire-une-demande',/* [auth,isRole.famille], */ catchErrors(animalController.hostRequest));
+animalRouter.post('/animaux/:id(\\d+)/faire-une-demande',[auth,isRole.famille], catchErrors(animalController.hostRequest));
 
 //* Ajouter un animal à l'asssociation
-animalRouter.post('/animaux/nouveau-profil', /* [auth,isRole.association], */ catchErrors(animalController.addAnimal));
+animalRouter.post('/animaux/nouveau-profil', [auth,isRole.association], catchErrors(animalController.addAnimal));
 
 //* Ajouter une image à un animal
-animalRouter.post("/upload/photo", /* [auth,isRole.association], */ upload, catchErrors(animalController.uploadPhoto));
+animalRouter.post("/upload/photo", [auth,isRole.association], upload, catchErrors(animalController.uploadPhoto));
 
 export { animalRouter };
