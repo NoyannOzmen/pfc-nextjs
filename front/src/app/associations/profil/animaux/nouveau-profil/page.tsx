@@ -1,6 +1,6 @@
 'use client'
 import Link from 'next/link';
-import { useEffect, useState, useRef } from "react";
+import { useState, useRef } from "react";
 import { useRootContext } from '@/contexts/RootContext';
 import { useUserContext } from "@/contexts/UserContext";
 import { ITag } from '@/@types/index';
@@ -42,37 +42,7 @@ function ShelterResidentAddProfile() {
   const [userMessage, setUserMessage] = useState(null);
 
   //* ANIMAL
-  useEffect(() => {
-    async function createAnimal() {
-      setUserMessage(null)
-      try {
-        const response = await fetch
-          (process.env.NEXT_PUBLIC_API_URL + `/animaux/nouveau-profil`,
-          {
-            method: 'POST',
-            headers: {
-              "Content-type" : "application/json",
-              "Authorization": `Bearer ${sessionStorage.getItem("site")}`
-            },
-            body: JSON.stringify(animalInfos),
-          }
-        );
-
-        const res = await response.json();
-        setUserMessage(res.message)
-      } catch (error) {
-        console.error(error);
-      }
-    }
-
-    if (isInitialMount.current) {
-      isInitialMount.current = false;
-    } else {
-      createAnimal();
-    }
-  }, [ animalInfos, setAnimalInfos ]);
-
-  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
     const formData = new FormData(event.currentTarget);
@@ -91,6 +61,25 @@ function ShelterResidentAddProfile() {
       description_animal: description_animal as string,
       tags_animal: tags_animal as string,
     });
+
+    try {
+      const response = await fetch
+        (process.env.NEXT_PUBLIC_API_URL + `/animaux/nouveau-profil`,
+        {
+          method: 'POST',
+          headers: {
+            "Content-type" : "application/json",
+            "Authorization": `Bearer ${sessionStorage.getItem("site")}`
+          },
+          body: JSON.stringify(animalInfos),
+        }
+      );
+
+      const res = await response.json();
+      setUserMessage(res.message)
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   //* TAG
@@ -284,7 +273,7 @@ function ShelterResidentAddProfile() {
                   </fieldset>
                     
                   <div className="flex justify-center">
-                    <button onClick={displayModal} type="button" id="create-tag" className="self-center hover:bg-accents1-dark rounded-full hover:underline bg-accents1 text-center font-grands text-fond font-semibold text-base py-0.5 px-4">Créer un tag</button>
+                    <button onClick={displayModal} type="button" id="create-tag" className="self-center hover:bg-accents1-dark rounded-full hover:underline bg-accents1-light text-center font-grands text-fond font-semibold text-base py-0.5 px-4">Créer un tag</button>
                   </div>
                 </div>
                   
@@ -294,7 +283,7 @@ function ShelterResidentAddProfile() {
               
               <fieldset className="flex flex-wrap justify-center w-full lg:col-start-2 lg:columns-2">
                 <div className="">
-                  <input type="submit" value="Envoyer" className="hover:bg-accents1-dark rounded-full hover:underline bg-accents1 text-center font-grands text-fond font-semibold text-base py-1 px-4" />
+                  <input type="submit" value="Créer le profil" className="hover:bg-accents1-dark rounded-full hover:underline bg-accents1 text-center font-grands text-fond font-semibold text-xl py-3 px-6" />
                 </div>
               </fieldset>
                     
