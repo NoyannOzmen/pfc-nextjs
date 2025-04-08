@@ -28,7 +28,7 @@ export default function Carousel() {
 
   const animalItems = sheltered?.map((animal, index) => (
     <div key={animal.id} className={width < 768 ? ("carousel-img " + (index === 0 ? "" : "hidden")) : ("carousel3-img place-self-center " + (index < 3 ? "" : "hidden"))}>
-      <div className="flex bg-zoning rounded-lg shadow dark:bg-gray-800 flex-row md:flex-col p-4">
+      <div className="flex bg-fond rounded-lg shadow dark:bg-gray-800 flex-row md:flex-col p-4">
         <div className="w-full md:w-full flex justify-center items-center">
         { animal.images_animal ? (
           <img className="object-contain w-[80%] h-48 md:h-full rounded-lg" src={`${process.env.NEXT_PUBLIC_API_URL}` + `${animal.images_animal[0].url}`} alt={`Photo de ${animal.nom}`} />
