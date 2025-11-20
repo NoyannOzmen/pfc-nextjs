@@ -11,18 +11,6 @@ function ShelterResidentAddProfile() {
   const isInitialMount = useRef(true);
   const auth = useUserContext();
 
-  const [animalInfos, setAnimalInfos ] = useState({
-    association_id: '',
-    nom_animal: '',
-    sexe_animal: '',
-    age_animal: '',
-    espece_animal: '',
-    race_animal: '',
-    couleur_animal: '',
-    description_animal: '',
-    tags_animal: '',
-  })
-
   const [ tagInfos, setTagInfos ] = useState({
     tag_name: '',
     tag_description: ''
@@ -34,7 +22,7 @@ function ShelterResidentAddProfile() {
 
   const tagItems = tags.map((tag) => (
     <div key={`Tag ${tag.id}`} className="flex gap-x-1.5 w-full"> 
-      <input  type="checkbox" id={tag.id} name={tag.id} value={tag.id} className="leading-3 size-6"/>
+      <input  type="checkbox" id={tag.id} name={`tag_${tag.id}`} value={tag.id} className="leading-3 size-6"/>
       <label htmlFor={tag.id} className="block font-grands text-xs leading-3">{tag.nom}</label>
     </div>
   ))
@@ -46,21 +34,9 @@ function ShelterResidentAddProfile() {
     event.preventDefault();
 
     const formData = new FormData(event.currentTarget);
-    const { nom_animal, sexe_animal, age_animal, espece_animal, race_animal, couleur_animal, description_animal, tags_animal } = Object.fromEntries(formData);
-
     const userId = auth.user?.refuge.id;
-
-    setAnimalInfos({
-      association_id: userId as string,
-      nom_animal: nom_animal as string,
-      sexe_animal: sexe_animal as string,
-      age_animal: age_animal as string,
-      espece_animal: espece_animal as string,
-      race_animal: race_animal as string,
-      couleur_animal: couleur_animal as string,
-      description_animal: description_animal as string,
-      tags_animal: tags_animal as string,
-    });
+    formData.append('association_id', userId as string)
+    const formObjData = Object.fromEntries((formData));
 
     try {
       const response = await fetch
@@ -71,7 +47,7 @@ function ShelterResidentAddProfile() {
             "Content-type" : "application/json",
             "Authorization": `Bearer ${sessionStorage.getItem("site")}`
           },
-          body: JSON.stringify(animalInfos),
+          body: JSON.stringify(formObjData),
         }
       );
 
