@@ -17,7 +17,7 @@ export default function ShelterAnimalUpload({ animalId }: ShelterAnimalUploadPro
       const pictureId = JSON.stringify(animalId);
       const formData = new FormData();
       formData.append("file", file);
-      formData.append("animalId", pictureId)
+      formData.append("animal_id", pictureId)
 
       try {
         const response = await fetch

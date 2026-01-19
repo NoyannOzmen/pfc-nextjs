@@ -78,7 +78,7 @@ const associationController = {
         let userImage = req.file.path;
 
         const trim = userImage.replace("./assets", "");
-        const assoId = req.body.assoId;
+        const assoId = req.body.asso_id;
         
         const association = await Association.findByPk(assoId, {
             include : 'images_association'
