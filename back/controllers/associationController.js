@@ -4,7 +4,10 @@ import { Op } from "sequelize";
 const associationController = {
     async getAll(req, res) {
         const associations = await Association.findAll({
-            include :  [ 'images_association', 'pensionnaires'/* , 'identifiant_association' */ ]
+            include :  [
+                'images_association',
+                { model : Animal, as : "pensionnaires", include : { model : Espece, as : "espece" } }
+            ]
         });
         
         const especes = await Espece.findAll();
@@ -14,11 +17,12 @@ const associationController = {
     async getSingleShelter(req,res) {
         const assoId = req.params.id;
         const shelter = await Association.findByPk(assoId,{
-            include :  [ 'images_association', 'pensionnaires'/* , 'identifiant_association' */ ]
+            include :  [
+                'images_association', 'pensionnaires'/* , 'identifiant_association' */ ]
         })
         res.json(shelter)
     },
-
+    /* 
     async getSearched(req,res) {
         const {
             espece,
@@ -47,6 +51,7 @@ const associationController = {
 
             return res.json(associations);
     },
+    */
 
     async update(req,res) {
         const associationId = Number(req.body.id)

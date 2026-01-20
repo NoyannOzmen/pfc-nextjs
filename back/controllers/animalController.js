@@ -61,6 +61,7 @@ export const animalController = {
         const demande = await Demande.findByPk(demandeId);
         res.json(demande)
     },
+    /*
     async getSearched(req,res) {
 
         const {
@@ -100,6 +101,7 @@ export const animalController = {
         
         return res.json(animals)
     },
+     */
     async hostRequest(req, res, next){
         const animalId = Number(req.body.animalId);
         const familleId = Number(req.body.familleId);

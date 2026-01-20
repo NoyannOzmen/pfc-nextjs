@@ -29,7 +29,7 @@ animalRouter.get('/demandes', catchErrors(animalController.getRequestsList));
 animalRouter.get('/demandes/:id(\\d+)', [auth,isRole.association], catchErrors(animalController.getOneRequest));
 
 //* Rendu de la page avec les animaux correspondant à la recherche
-animalRouter.post('/animaux', catchErrors(animalController.getSearched));
+/* animalRouter.post('/animaux', catchErrors(animalController.getSearched)); */
 
 //* Route de demande d'accueil d'un animal par un.e user
 animalRouter.post('/animaux/:id(\\d+)/faire-une-demande',[auth,isRole.famille], catchErrors(animalController.hostRequest));

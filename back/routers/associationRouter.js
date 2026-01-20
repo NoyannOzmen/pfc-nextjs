@@ -14,7 +14,7 @@ associationRouter.get('/associations', catchErrors(associationController.getAll)
 associationRouter.get('/associations/:id(\\d+)', catchErrors(associationController.getSingleShelter));
 
 //Affichage des résultats d'une recherche association
-associationRouter.post('/associations', catchErrors(associationController.getSearched));
+/* associationRouter.post('/associations', catchErrors(associationController.getSearched)); */
 
 //* DASHBOARD
 //Mise à jour des informations depuis le compte association
