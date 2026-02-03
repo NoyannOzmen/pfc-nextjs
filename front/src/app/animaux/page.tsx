@@ -1,52 +1,53 @@
-'use client'
+'use client';
 import { useEffect, useState } from 'react';
 import { useRootContext } from '@/contexts/RootContext';
-import AnimalCard from "@/components/Animal/AnimalCard";
+import AnimalCard from '@/components/Animal/AnimalCard';
 import DptSelect from '@/components/Animal/DptSelect';
 import { IAnimal } from '@/@types/index';
-
 
 export default function AnimalList() {
   const { animals, species, tags } = useRootContext();
 
-  let available = animals.filter(({ statut }) => statut === "En refuge")
+  const available = animals.filter(({ statut }) => statut === 'En refuge');
 
-  const [ sheltered, setSheltered ] = useState(
-    animals.filter(({ statut }) => statut === "En refuge")
-  )
+  const [sheltered, setSheltered] = useState(
+    animals.filter(({ statut }) => statut === 'En refuge')
+  );
 
-  let animalItems = sheltered.map((animal : IAnimal) => (
+  const animalItems = sheltered.map((animal: IAnimal) => (
     <AnimalCard key={animal.id} animal={animal} />
-  ))
+  ));
 
-  const speciesItems = species.map((espece) => (
-    <option key={espece.id} value={espece.nom}>{espece.nom}</option>
-  ))
+  const speciesItems = species.map(espece => (
+    <option key={espece.id} value={espece.nom}>
+      {espece.nom}
+    </option>
+  ));
 
-  const tagItems = tags.map((tag) => (
-    <div key={tag.id} >
-    <label htmlFor={`${tag.nom}`}>{tag.nom}</label>
-    <input onChange={handleCheck} type="checkbox" name="tag" id={tag.nom} value={tag.nom} />
-  </div>
-  ))
+  const tagItems = tags.map(tag => (
+    <div key={tag.id}>
+      <label htmlFor={`${tag.nom}`}>{tag.nom}</label>
+      <input onChange={handleCheck} type="checkbox" name="tag" id={tag.nom} value={tag.nom} />
+    </div>
+  ));
 
   //* Search
   const [tag, setTag] = useState<Array<string>>([]);
 
   function handleCheck(e: React.ChangeEvent<HTMLInputElement>) {
     const { value, checked } = e.target;
-    if(checked) {
-      setTag([...tag, value])
+    if (checked) {
+      setTag([...tag, value]);
     } else {
-      setTag(tag.filter((e : string) => e !== value))
+      setTag(tag.filter((e: string) => e !== value));
     }
   }
 
   let filtered = sheltered;
-  let sexe : String | undefined  = '';
+  let sexe: string | undefined = '';
 
   useEffect(() => {
-    let sexes: NodeListOf<HTMLInputElement> = document.querySelectorAll('input[name="sexe"]');
+    const sexes: NodeListOf<HTMLInputElement> = document.querySelectorAll('input[name="sexe"]');
     sexes.forEach(radio => {
       radio.addEventListener('change', () => {
         sexe = handleInputData('sexe');
@@ -54,15 +55,16 @@ export default function AnimalList() {
     });
   }, []);
 
-
-  function filterResultsSmall(event : any) {
+  function filterResultsSmall(event: React.MouseEvent<HTMLInputElement>) {
     event?.preventDefault();
     filtered = available;
-    let especeDropdownSmall = document.getElementById('espece-dropdown-small') as HTMLInputElement;
+    const especeDropdownSmall = document.getElementById(
+      'espece-dropdown-small'
+    ) as HTMLInputElement;
 
-    if (especeDropdownSmall.value !== "defaultSmall") {
-      let filtered = available.filter((animal) =>
-        animal?.espece.nom.toLowerCase().includes(especeDropdownSmall.value.toLowerCase()),
+    if (especeDropdownSmall.value !== 'defaultSmall') {
+      filtered = available.filter(animal =>
+        animal?.espece.nom.toLowerCase().includes(especeDropdownSmall.value.toLowerCase())
       );
 
       setSheltered(filtered);
@@ -72,94 +74,95 @@ export default function AnimalList() {
   }
 
   const handleInputData = (name: string): string | undefined => {
-    const options: NodeListOf<HTMLInputElement> = document.querySelectorAll(`input[name="${name}"]`);
-      for (const option of options) {
-        if (option.checked) {
-          return option.value;
-        }
+    const options: NodeListOf<HTMLInputElement> = document.querySelectorAll(
+      `input[name="${name}"]`
+    );
+    for (const option of options) {
+      if (option.checked) {
+        return option.value;
       }
-      return undefined;
+    }
+    return undefined;
   };
 
-  function filterResultsFull(event : any) {
+  function filterResultsFull(event: React.MouseEvent<HTMLInputElement>) {
     event?.preventDefault();
     filtered = available;
 
-    let especeDropdownFull = document.getElementById("espece-dropdown-full") as HTMLInputElement;
-    let minAge = document.getElementById("age-min") as HTMLInputElement;
-    let maxAge  = document.getElementById("age-max") as HTMLInputElement;
-    let dptSelect = document.getElementById("dpt-select") as HTMLSelectElement;
+    const especeDropdownFull = document.getElementById('espece-dropdown-full') as HTMLInputElement;
+    const minAge = document.getElementById('age-min') as HTMLInputElement;
+    const maxAge = document.getElementById('age-max') as HTMLInputElement;
+    const dptSelect = document.getElementById('dpt-select') as HTMLSelectElement;
 
-    if(especeDropdownFull.value !== "defaultFull") {
-      filtered = filtered.filter((animal) =>
+    if (especeDropdownFull.value !== 'defaultFull') {
+      filtered = filtered.filter(animal =>
         animal.espece.nom.toLowerCase().includes(especeDropdownFull.value.toLowerCase())
-    )} else { filtered = filtered }
+      );
+    }
 
-    if(sexe) {
-      filtered = filtered.filter((animal) =>
-        animal.sexe.toLowerCase() === sexe?.toLowerCase()
-    )} else { filtered = filtered }
+    if (sexe) {
+      filtered = filtered.filter(animal => animal.sexe.toLowerCase() === sexe?.toLowerCase());
+    }
 
-    if(dptSelect.value !== "default") {
-      filtered = filtered.filter((animal) =>
-        animal.refuge.code_postal.startsWith(dptSelect.value)
-    )} else { filtered = filtered }
-    
-    if(minAge.value) {
-      filtered = filtered.filter((animal) =>
-        animal.age > Number(minAge.value)
-    )} else { filtered = filtered }
-    
-    if(maxAge.value) {
-      filtered = filtered.filter((animal) =>
-        animal.age < Number(maxAge.value)
-    )} else { filtered = filtered }
+    if (dptSelect.value !== 'default') {
+      filtered = filtered.filter(animal => animal.refuge.code_postal.startsWith(dptSelect.value));
+    }
 
-    if(tag.length > 0) {
-      let tagFilteringArray : any = [];
+    if (minAge.value) {
+      filtered = filtered.filter(animal => animal.age > Number(minAge.value));
+    }
 
-      filtered.forEach((animal) =>
-        tag.forEach((identification) => {
-          const found = animal.tags.some((tag: { nom: string; }) => tag.nom === identification);
+    if (maxAge.value) {
+      filtered = filtered.filter(animal => animal.age < Number(maxAge.value));
+    }
 
-          if(!found && !tagFilteringArray.includes(animal)) {
-            tagFilteringArray.push(animal)
+    if (tag.length > 0) {
+      let tagFilteringArray: IAnimal[] = [];
+
+      filtered.forEach(animal =>
+        tag.forEach(identification => {
+          const found = animal.tags.some((tag: { nom: string }) => tag.nom === identification);
+
+          if (!found && !tagFilteringArray.includes(animal)) {
+            tagFilteringArray.push(animal);
           }
-          if(found && tagFilteringArray.includes(animal)) {
-             tagFilteringArray = tagFilteringArray.filter((a : any) => a !== animal)
-            }
+          if (found && tagFilteringArray.includes(animal)) {
+            tagFilteringArray = tagFilteringArray.filter((a: IAnimal) => a !== animal);
+          }
         })
-      )
+      );
       filtered = tagFilteringArray;
-    } else { filtered = filtered}
-    
-    setSheltered(filtered)
+    }
+
+    setSheltered(filtered);
   }
 
   function deploySearch() {
     const shortSearch = document.getElementById('fullSearch');
-    shortSearch && shortSearch.classList.toggle('hidden');
-  
+    shortSearch?.classList.toggle('hidden');
+
     const filters = document.getElementById('searchCriterias');
-    filters && filters.classList.toggle('hidden');
-    filters && filters.classList.toggle('grid');
+    filters?.classList.toggle('hidden');
+    filters?.classList.toggle('grid');
   }
 
   function resetSearch() {
-    let especeDropdownSmall = document.getElementById('espece-dropdown-small') as HTMLInputElement;
-    let especeDropdownFull = document.getElementById("espece-dropdown-full") as HTMLInputElement;
-    let minAge = document.getElementById("age-min") as HTMLInputElement;
-    let maxAge  = document.getElementById("age-max") as HTMLInputElement;
-    let dptSelect = document.getElementById("dpt-select") as HTMLSelectElement;
+    const especeDropdownSmall = document.getElementById(
+      'espece-dropdown-small'
+    ) as HTMLInputElement;
+    const especeDropdownFull = document.getElementById('espece-dropdown-full') as HTMLInputElement;
+    const minAge = document.getElementById('age-min') as HTMLInputElement;
+    const maxAge = document.getElementById('age-max') as HTMLInputElement;
+    const dptSelect = document.getElementById('dpt-select') as HTMLSelectElement;
 
-    let sexes: NodeListOf<HTMLInputElement> = document.querySelectorAll('input[name="sexe"]');
-    let tagSelect: NodeListOf<HTMLInputElement> = document.querySelectorAll('input[name="tag"]');
+    const sexes: NodeListOf<HTMLInputElement> = document.querySelectorAll('input[name="sexe"]');
+    const tagSelect: NodeListOf<HTMLInputElement> = document.querySelectorAll('input[name="tag"]');
 
     minAge.value = '';
     maxAge.value = '';
-    dptSelect.value = "default";
-    especeDropdownFull.value = "defaultFull";
-    especeDropdownSmall.value = "defaultSmall";
+    dptSelect.value = 'default';
+    especeDropdownFull.value = 'defaultFull';
+    especeDropdownSmall.value = 'defaultSmall';
 
     sexes.forEach(radio => {
       if (radio.checked) {
@@ -172,53 +175,101 @@ export default function AnimalList() {
         tag.checked = !tag.checked;
       }
     });
-    setSheltered(available)
+    setSheltered(available);
   }
 
   return (
     <main className="justify-self-stretch flex-1">
-  
       {/* <!-- Menu de recherche --> */}
       <div className="md:my-3 flex flex-wrap font-body w-full bg-zoning rounded-lg shadow dark:bg-gray-800 justify-around">
         <form className="text-texte justify-around">
-          <div id="fullSearch" className="mx-2 col-span-3 items-center flex flex-wrap justify-around">
+          <div
+            id="fullSearch"
+            className="mx-2 col-span-3 items-center flex flex-wrap justify-around"
+          >
             <h2 className="font-grands text-2xl w-full my-2 text-center">Rechercher un animal</h2>
             <label htmlFor="espece-dropdown-small">Par espèce</label>
-            <select tabIndex={0} className="col-span-3 text-xs block w-[50%]" id="espece-dropdown-small" name="especeDropdownSmall" defaultValue="defaultSmall">
-              <option value="defaultSmall" disabled hidden>--Choisissez une espèce--</option>
+            <select
+              tabIndex={0}
+              className="col-span-3 text-xs block w-[50%]"
+              id="espece-dropdown-small"
+              name="especeDropdownSmall"
+              defaultValue="defaultSmall"
+            >
+              <option value="defaultSmall" disabled hidden>
+                --Choisissez une espèce--
+              </option>
               {speciesItems}
             </select>
-              <input tabIndex={0} onClick={deploySearch} id="deploy" className="w-[20%] col-span-1 my-1 py-2 px-2 bg-accents2-dark text-fond transition ease-in duration-200 text-center text-xs font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg" type="button" value="Filtres" />
-              <input tabIndex={0} onClick={filterResultsSmall} className="w-1/3 col-span-1 mx-auto my-3 py-2 px-2 bg-accents1-light text-fond transition ease-in duration-200 text-center text-xs font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg" type="button" value="Rechercher" />
-              <div className='w-full mx-auto flex justify-center'>
-                <input tabIndex={0} onClick={resetSearch} className="w-[20%] self-center col-span-3 my-1 py-2 px-2 bg-accents2-dark text-fond transition ease-in duration-200 text-center text-xs font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg" type="button" value="Réinitialiser" />  
-              </div>       
+            <input
+              tabIndex={0}
+              onClick={deploySearch}
+              id="deploy"
+              className="w-[20%] col-span-1 my-1 py-2 px-2 bg-accents2-dark text-fond transition ease-in duration-200 text-center text-xs font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg"
+              type="button"
+              value="Filtres"
+            />
+            <input
+              tabIndex={0}
+              onClick={filterResultsSmall}
+              className="w-1/3 col-span-1 mx-auto my-3 py-2 px-2 bg-accents1-light text-fond transition ease-in duration-200 text-center text-xs font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg"
+              type="button"
+              value="Rechercher"
+            />
+            <div className="w-full mx-auto flex justify-center">
+              <input
+                tabIndex={0}
+                onClick={resetSearch}
+                className="w-[20%] self-center col-span-3 my-1 py-2 px-2 bg-accents2-dark text-fond transition ease-in duration-200 text-center text-xs font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg"
+                type="button"
+                value="Réinitialiser"
+              />
+            </div>
           </div>
           <div id="searchCriterias" className="hidden grid-cols-3 gap-1 mx-auto my-3 text-texte">
-            <h3 className="col-span-3 font-grands text-3xl text-center my-2">Rechercher un animal</h3> 
-            
+            <h3 className="col-span-3 font-grands text-3xl text-center my-2">
+              Rechercher un animal
+            </h3>
+
             <div className="col-span-1 mx-auto">
               <h4>Caractéristiques</h4>
-              
+
               {/* <!-- Choix de l'espèce --> */}
               <div className="my-2">
                 <label htmlFor="espece-dropdown-full">Espèce</label>
-                <select tabIndex={0} className="text-xs block" id="espece-dropdown-full" name="especeDropdownFull" defaultValue="defaultFull">
-                  <option value="defaultFull" disabled hidden>--Choisissez une espèce--</option>
+                <select
+                  tabIndex={0}
+                  className="text-xs block"
+                  id="espece-dropdown-full"
+                  name="especeDropdownFull"
+                  defaultValue="defaultFull"
+                >
+                  <option value="defaultFull" disabled hidden>
+                    --Choisissez une espèce--
+                  </option>
                   {speciesItems}
                 </select>
               </div>
-                
+
               {/* <!-- Sexe --> */}
               <div className="my-2">
                 <fieldset id="sexe">
                   <legend>Sexe</legend>
-                  <label><input type="radio" name="sexe" value="Mâle" className="mx-1" />Mâle</label>
-                  <label><input type="radio" name="sexe" value="Femelle" className="mx-1"/>Femelle</label>
-                  <label><input type="radio" name="sexe" value="Inconnu" className="mx-1"/>Inconnu</label>
+                  <label>
+                    <input type="radio" name="sexe" value="Mâle" className="mx-1" />
+                    Mâle
+                  </label>
+                  <label>
+                    <input type="radio" name="sexe" value="Femelle" className="mx-1" />
+                    Femelle
+                  </label>
+                  <label>
+                    <input type="radio" name="sexe" value="Inconnu" className="mx-1" />
+                    Inconnu
+                  </label>
                 </fieldset>
               </div>
-              
+
               {/* <!-- Selection Age --> */}
               <div className="my-2">
                 <p>Age :</p>
@@ -229,37 +280,54 @@ export default function AnimalList() {
                 <label>&nbsp;ans.</label>
               </div>
             </div>
-              
+
             {/* <!-- Sélection Tags --> */}
             <div className="col-span-1">
               <p>Exclure si :</p>
               {tagItems}
             </div>
-              
-            <div className="col-span-1">   
+
+            <div className="col-span-1">
               <div className="my-2">
                 {/* <!-- Département --> */}
                 <label htmlFor="dpt-select">Département</label>
-                <select tabIndex={0} className="text-xs block" id="dpt-select" name="dptSelect" defaultValue="default">
+                <select
+                  tabIndex={0}
+                  className="text-xs block"
+                  id="dpt-select"
+                  name="dptSelect"
+                  defaultValue="default"
+                >
                   <DptSelect />
-                </select>  
+                </select>
               </div>
             </div>
 
-            <input tabIndex={0} onClick={filterResultsFull} className="col-span-3 w-[60%] mx-auto my-3 py-2 px-4 bg-accents1-light text-fond transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg"  type="button" value="Rechercher" />
-            <input tabIndex={0} onClick={resetSearch} className="col-span-3 w-[40%] mx-auto my-3 py-2 px-4 bg-accents2-dark text-fond transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg" type="button" value="Réinitialiser" />
+            <input
+              tabIndex={0}
+              onClick={filterResultsFull}
+              className="col-span-3 w-[60%] mx-auto my-3 py-2 px-4 bg-accents1-light text-fond transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg"
+              type="button"
+              value="Rechercher"
+            />
+            <input
+              tabIndex={0}
+              onClick={resetSearch}
+              className="col-span-3 w-[40%] mx-auto my-3 py-2 px-4 bg-accents2-dark text-fond transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg"
+              type="button"
+              value="Réinitialiser"
+            />
           </div>
         </form>
       </div>
 
-      { sheltered.length ? (
-        <div className="grid grid-flow-row-dense grid-cols-3 gap-3 m-3">
-          {animalItems}
-        </div>
+      {sheltered.length ? (
+        <div className="grid grid-flow-row-dense grid-cols-3 gap-3 m-3">{animalItems}</div>
       ) : (
-        <h3 className="font-grands text-2xl w-full my-2 text-center">Aucun animal ne correspond à votre recherche</h3>
+        <h3 className="font-grands text-2xl w-full my-2 text-center">
+          Aucun animal ne correspond à votre recherche
+        </h3>
       )}
-
     </main>
-  )
+  );
 }

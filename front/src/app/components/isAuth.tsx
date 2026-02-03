@@ -1,14 +1,14 @@
-"use client";
-import { useEffect } from "react";
-import { redirect } from "next/navigation";
-import { useUserContext } from "@/contexts/UserContext";
+'use client';
+import { useEffect } from 'react';
+import { redirect } from 'next/navigation';
+import { useUserContext } from '@/contexts/UserContext';
 
-export function isFoster(Component: any) {
-  return function IsFoster(props: any) {
+export function isFoster(Component: React.ComponentType) {
+  return function IsFoster(props: React.ComponentProps<typeof Component>) {
     const auth = useUserContext();
     useEffect(() => {
       if (!auth.user?.accueillant) {
-        return redirect("/");
+        return redirect('/');
       }
     }, []);
     if (!auth) {
@@ -18,12 +18,12 @@ export function isFoster(Component: any) {
   };
 }
 
-export function isShelter(Component: any) {
-  return function IsShelter(props: any) {
+export function isShelter(Component: React.ComponentType) {
+  return function IsShelter(props: React.ComponentProps<typeof Component>) {
     const auth = useUserContext();
     useEffect(() => {
       if (!auth.user?.refuge) {
-        return redirect("/");
+        return redirect('/');
       }
     }, []);
     if (!auth) {

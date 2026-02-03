@@ -1,9 +1,9 @@
-import Link from 'next/link';;
+import Link from 'next/link';
 import ScrollButton from './ScrollButton';
 
 export default function Footer() {
   return (
-  <>
+    <>
       <ScrollButton />
 
       <footer className="bg-zoning p-2 flex-none">
@@ -26,10 +26,13 @@ export default function Footer() {
           </nav>
         </div>
         <div className="flex flex-col place-content-evenly text-xs lg:text-sm h-8 lg:h-16">
-          <p className="text-center italic">Copyright &copy; Pet Foster Connect 2024<br />Tous droits réservés </p>
+          <p className="text-center italic">
+            Copyright &copy; Pet Foster Connect 2024
+            <br />
+            Tous droits réservés{' '}
+          </p>
         </div>
       </footer>
-  </>
-
-  )
+    </>
+  );
 }

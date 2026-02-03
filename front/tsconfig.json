@@ -2,11 +2,7 @@
   "compilerOptions": {
     "target": "ES2020",
     "useDefineForClassFields": true,
-    "lib": [
-      "ES2020",
-      "DOM",
-      "DOM.Iterable"
-    ],
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
     "module": "ESNext",
     "esModuleInterop": true,
     "skipLibCheck": true,
@@ -30,18 +26,10 @@
     ],
     "baseUrl": "src/",
     "paths": {
-      "@/components/*": [
-        "app/components/*"
-      ],
-      "@/contexts/*": [
-        "app/contexts/*"
-      ],
-      "@/@types/*": [
-        "@types/*"
-      ],
-      "@/globals.css": [
-        "app/globals.css"
-      ]
+      "@/components/*": ["app/components/*"],
+      "@/contexts/*": ["app/contexts/*"],
+      "@/@types/*": ["@types/*"],
+      "@/globals.css": ["app/globals.css"]
     }
   },
   "include": [
@@ -51,7 +39,5 @@
     ".next/types/**/*.ts",
     ".next/dev/types/**/*.ts"
   ],
-  "exclude": [
-    "./node_modules"
-  ]
+  "exclude": ["./node_modules"]
 }

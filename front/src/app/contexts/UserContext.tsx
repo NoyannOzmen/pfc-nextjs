@@ -1,6 +1,6 @@
-'use client'
+'use client';
 import { createContext, useContext, useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation'
+import { useRouter } from 'next/navigation';
 import { IUtilisateur } from '@/@types/index';
 
 type UserContextType = {
@@ -10,7 +10,7 @@ type UserContextType = {
   /* setToken: React.Dispatch<React.SetStateAction<string | null>>; */
   userMessage: string | null;
   /* setUserMessage : React.Dispatch<React.SetStateAction<string | null>>; */
-  logIn : (credentials : { email: string; mot_de_passe : string}) => Promise<void>;
+  logIn: (credentials: { email: string; mot_de_passe: string }) => Promise<void>;
   logOut(): Promise<void>;
 };
 
@@ -25,67 +25,65 @@ export const UserContext = createContext<UserContextType | null>(null);
   return user ? JSON.parse(user) : null
 } */
 
-export default function UserContextProvider({
-  children,
-}: UserContextProviderProps) {
+export default function UserContextProvider({ children }: UserContextProviderProps) {
   const [user, setUser] = useState<IUtilisateur | null>(null);
 
   useEffect(() => {
-    sessionStorage!.setItem("user", JSON.stringify(user))
-}, [user])
+    sessionStorage!.setItem('user', JSON.stringify(user));
+  }, [user]);
 
   const [userMessage, setUserMessage] = useState(null);
-  const [token, setToken] = useState("");
-  const router = useRouter()
+  const [token, setToken] = useState('');
+  const router = useRouter();
 
-  async function logIn(credentials: { email: string; mot_de_passe : string}) {
-
-    setUserMessage(null)
+  async function logIn(credentials: { email: string; mot_de_passe: string }) {
+    setUserMessage(null);
     try {
-      const response = await fetch
-        (process.env.NEXT_PUBLIC_API_URL + `/connexion`,
-        {
-          method: 'POST',
-          headers: { "Content-type" : "application/json" },
-          body: JSON.stringify(credentials),
-        }
-      );
+      const response = await fetch(process.env.NEXT_PUBLIC_API_URL + `/connexion`, {
+        method: 'POST',
+        headers: { 'Content-type': 'application/json' },
+        body: JSON.stringify(credentials),
+      });
 
       const res = await response.json();
 
       if (!res.ok) {
-        setUserMessage(res.message)
-        router.push('/connexion')        
+        setUserMessage(res.message);
+        router.push('/connexion');
       }
       if (res) {
-        res.user ? setUser(res.user) : setUser(res);
+        if (res.user) {
+          setUser(res.user);
+        } else {
+          setUser(res);
+        }
         setToken(res.access_token);
-        sessionStorage.setItem("site", res.access_token);
-        router.push('/')
+        sessionStorage.setItem('site', res.access_token);
+        router.push('/');
       }
     } catch (error) {
       console.error(error);
     }
   }
 
-  async function logOut() : Promise<void> {
-    setUser(null)
+  async function logOut(): Promise<void> {
+    setUser(null);
     setToken('');
-    sessionStorage.removeItem("site");
-    router.push('/')
-  };
+    sessionStorage.removeItem('site');
+    router.push('/');
+  }
 
   return (
-    <UserContext.Provider value={{ user, setUser, token, userMessage, logIn, logOut}}>{children}</UserContext.Provider>
+    <UserContext.Provider value={{ user, setUser, token, userMessage, logIn, logOut }}>
+      {children}
+    </UserContext.Provider>
   );
 }
 export function useUserContext() {
   const context = useContext(UserContext);
 
   if (!context) {
-    throw new Error(
-      'useUserContext doit être utilisé dans UserContextProvider'
-    );
+    throw new Error('useUserContext doit être utilisé dans UserContextProvider');
   }
 
   return context;

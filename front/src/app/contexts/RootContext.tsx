@@ -1,13 +1,13 @@
-'use client'
+'use client';
 import { createContext, useContext, useEffect, useState } from 'react';
 import { IAnimal, IEspece, ITag, IAssociation } from '@/@types/index';
 
 type RootContextType = {
   animals: IAnimal[];
-  species : IEspece[];
+  species: IEspece[];
   tags: ITag[];
-  shelters: IAssociation[]
-}
+  shelters: IAssociation[];
+};
 
 type UserContextProviderProps = {
   children: React.ReactNode;
@@ -35,9 +35,7 @@ const getInitialShelterState = () => {
   return shelters ? JSON.parse(shelters) : null
 } */
 
-export default function RootContextProvider({
-  children,
-}: UserContextProviderProps) {
+export default function RootContextProvider({ children }: UserContextProviderProps) {
   const [animals, setAnimals] = useState<IAnimal[]>([]);
   const [species, setSpecies] = useState<IEspece[]>([]);
   const [tags, setTags] = useState<ITag[]>([]);
@@ -60,7 +58,7 @@ export default function RootContextProvider({
       } catch (error) {
         console.error(error);
       }
-    }
+    };
 
     const fetchSpecies = async () => {
       try {
@@ -71,7 +69,7 @@ export default function RootContextProvider({
       } catch (error) {
         console.error(error);
       }
-    }
+    };
 
     const fetchTags = async () => {
       try {
@@ -82,7 +80,7 @@ export default function RootContextProvider({
       } catch (error) {
         console.error(error);
       }
-    }
+    };
 
     const fetchShelters = async () => {
       try {
@@ -93,7 +91,7 @@ export default function RootContextProvider({
       } catch (error) {
         console.error(error);
       }
-    }
+    };
 
     fetchSpecies();
     fetchAnimals();
@@ -102,17 +100,17 @@ export default function RootContextProvider({
   }, []);
 
   return (
-    <RootContext.Provider value={{animals, shelters, tags, species}}>{children}</RootContext.Provider>
-  )
+    <RootContext.Provider value={{ animals, shelters, tags, species }}>
+      {children}
+    </RootContext.Provider>
+  );
 }
 
 export function useRootContext() {
   const context = useContext(RootContext);
 
   if (!context) {
-    throw new Error(
-      'useRootContext doit être utilisé dans RootContextProvider'
-    );
+    throw new Error('useRootContext doit être utilisé dans RootContextProvider');
   }
 
   return context;

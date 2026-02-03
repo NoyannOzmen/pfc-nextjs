@@ -6,7 +6,9 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "lint": "eslint .",
+    "format": "prettier --write ."
   },
   "dependencies": {
     "autoprefixer": "^10.4.21",
@@ -15,7 +17,6 @@
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",
     "email-validator": "^2.0.4",
-    "eslint-config-next": "^16.0.7",
     "express": "^4.21.2",
     "express-session": "^1.18.1",
     "joi": "^17.13.3",
@@ -40,6 +41,7 @@
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.19",
     "globals": "^15.15.0",
+    "prettier": "^3.8.1",
     "typescript": "~5.6.3",
     "typescript-eslint": "^8.28.0"
   },
@@ -63,7 +65,12 @@
       "qs@<6.14.1": ">=6.14.1",
       "tar@<=7.5.2": ">=7.5.3",
       "tar@<=7.5.3": ">=7.5.4",
-      "lodash@>=4.0.0 <=4.17.22": ">=4.17.23"
+      "lodash@>=4.0.0 <=4.17.22": ">=4.17.23",
+      "next@>=15.6.0-canary.0 <16.1.5": ">=16.1.5",
+      "next@>=16.0.0-beta.0 <16.1.5": ">=16.1.5",
+      "next@>=16.0.0-beta.0 <16.0.11": ">=16.0.11",
+      "tar@<7.5.7": ">=7.5.7",
+      "eslint@<9.26.0": ">=9.26.0"
     }
   }
 }
