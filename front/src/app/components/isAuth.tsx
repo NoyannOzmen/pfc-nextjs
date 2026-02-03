@@ -1,33 +1,23 @@
 'use client';
-import { useEffect } from 'react';
 import { redirect } from 'next/navigation';
 import { useUserContext } from '@/contexts/UserContext';
 
 export function isFoster(Component: React.ComponentType) {
   return function IsFoster(props: React.ComponentProps<typeof Component>) {
     const auth = useUserContext();
-    useEffect(() => {
-      if (!auth.user?.accueillant) {
+    if (!auth.user?.accueillant || !auth) {
         return redirect('/');
-      }
-    }, []);
-    if (!auth) {
-      return null;
     }
     return <Component {...props} />;
   };
 }
 
-export function isShelter(Component: React.ComponentType) {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export function isShelter(Component: React.ComponentType<any>) {
   return function IsShelter(props: React.ComponentProps<typeof Component>) {
     const auth = useUserContext();
-    useEffect(() => {
-      if (!auth.user?.refuge) {
-        return redirect('/');
-      }
-    }, []);
-    if (!auth) {
-      return null;
+    if (!auth.user?.refuge || !auth) {
+          return redirect('/');
     }
     return <Component {...props} />;
   };
